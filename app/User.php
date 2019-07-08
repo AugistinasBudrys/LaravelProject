@@ -5,7 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -37,14 +42,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany('App\role');
 
     }
-    public function hasAnyRoles($roles){
-        return null !== $this->roles()->whereIn('name', $roles)->first();
-    }
-    public function hasAnyRole($role){
+
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasAnyRole($role)
+    {
         return null !== $this->roles()->where('name', $role)->first();
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function Remove($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->roles()->detach();
+            $user->delete();
+            return true;
+        }
+        return false;
     }
 }

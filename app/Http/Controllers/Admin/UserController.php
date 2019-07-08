@@ -7,75 +7,57 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Admin
+ */
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): view
     {
-        return view('admin.users.index')->with('users',User::paginate(10));
-    }
-
-
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        if(Auth::user()->id==$id){
-            return redirect()->route('admin.users.index')->with('warning', 'You are not allowed to edit yourself');
-        }
-
-        return view('admin.users.edit')->with(['user'=>User::find($id), 'roles'=>Role::all()]);
+        return view('admin.users.index')->with('users', User::paginate(10));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return View
      */
-    public function update(Request $request, $id)
+    public function edit(int $id): view
     {
-        if(Auth::user()->id==$id){
-            return redirect()->route('admin.users.index')->with('warning', 'You are not allowed to edit yourself');
-        }
+        return view('admin.users.edit')->with(['user' => User::find($id), 'roles' => Role::all()]);
+    }
 
-        $user=User::find($id);
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request,int $id)
+    {
+        $user = User::find($id);
         $user->roles()->sync($request->roles);
 
         return redirect()->route('admin.users.index')->with('success', 'User has been updated');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        if(Auth::user()->id==$id){
-            return redirect()->route('admin.users.index')->with('warning','You are not allowed to edit yourself.');
-        }
-
-        $user=User::find($id);
-        if($user){
-            $user->roles()->detach();
-            $user->delete();
-            return redirect()->route('admin.users.index')->with('success','User has been deleted');
-        }
-        return redirect()->route('admin.users.index')->with('warning','this User cannot be deleted');
+        $remov = new User();
+          if($remov->remove($id)===true) {return redirect()
+        ->route('admin.users.index')
+        ->with('success', 'User has been deleted');}
+        else
+        {return redirect()
+            ->route('admin.users.index')
+            ->with('warning', 'this User cannot be deleted');}
     }
 }

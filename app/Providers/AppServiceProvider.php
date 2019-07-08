@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 use Schema;
 
+/**
+ * Class AppServiceProvider
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**

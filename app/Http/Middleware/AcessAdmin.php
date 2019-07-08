@@ -8,16 +8,14 @@ use Auth;
 class AcessAdmin
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
     public function handle($request, Closure $next)
     {
         //Auth::user()->hasAnyRole('admin');
-        if(Auth::user()->hasAnyRoles(['admin','author'])){
+        if(Auth::user()->hasAnyRole(['admin'])){
             return $next($request);
         }
         return redirect('home');

@@ -15,10 +15,10 @@
                             @foreach($roles as $role)
                                 <div class="form-check">
                                     <input type="checkbox" name="roles[]" value="{{$role->id}}"
-                                           {{$user->hasAnyRole($role->name)?'checked':''}}>
+                                            {{$user->hasAnyRole($role->name)?'checked':''}}>
                                     <label>{{$role->name}}</label>
                                 </div>
-                                @endforeach
+                            @endforeach
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
