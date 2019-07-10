@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use phpDocumentor\Reflection\Types\Mixed_;
+use phpDocumentor\Reflection\Types\Object_;
 
 class RegisterController extends Controller
 {
@@ -42,9 +44,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -58,9 +58,9 @@ class RegisterController extends Controller
 
     /**
      * @param array $data
-     * @return mixed
+     * @return User
      */
-    protected function create(array $data)
+    public function create(array $data): User
     {
         $user = User::create([
             'name' => $data['name'],
@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $role=Role::select('id')->where('name', 'user')->first();
+        $role = Role::select('id')->where('name', 'user')->first();
 
         $user->roles()->attach($role);
 

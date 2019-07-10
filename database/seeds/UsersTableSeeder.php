@@ -4,9 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
 
-/**
- * Class UsersTableSeeder
- */
+
 class UsersTableSeeder extends Seeder
 {
     /**

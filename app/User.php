@@ -7,10 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\RedirectResponse;
 
-/**
- * Class User
- * @package App
- */
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -45,23 +42,22 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany('App\role');
-
     }
 
     /**
      * @param $role
      * @return bool
      */
-    public function hasAnyRole($role)
+    public function hasAnyRole($role):bool
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return bool
      */
-    public function Remove($id)
+    public function Remove(int $id): bool
     {
         $user = User::find($id);
         if ($user) {
@@ -70,5 +66,10 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany('App\event');
     }
 }

@@ -7,27 +7,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
-/**
- * Class BladeExtrasServiceProvider
- * @package App\Providers
- */
 class BladeExtrasServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
         Blade::if('hasrole', function ($expression) {

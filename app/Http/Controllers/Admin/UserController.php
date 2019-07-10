@@ -6,28 +6,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use \Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\Support\Renderable;
 
-/**
- * Class UserController
- * @package App\Http\Controllers\Admin
- */
 class UserController extends Controller
 {
+
     /**
-     * @return View
+     * @return Renderable
      */
-    public function index(): view
+    public function index(): Renderable
     {
         return view('admin.users.index')->with('users', User::paginate(10));
     }
 
     /**
      * @param int $id
-     * @return View
+     * @return Renderable
      */
-    public function edit(int $id): view
+    public function edit(int $id): Renderable
     {
         return view('admin.users.edit')->with(['user' => User::find($id), 'roles' => Role::all()]);
     }
@@ -35,9 +32,9 @@ class UserController extends Controller
     /**
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request,int $id)
+    public function update(Request $request, int $id): redirectresponse
     {
         $user = User::find($id);
         $user->roles()->sync($request->roles);
@@ -47,17 +44,15 @@ class UserController extends Controller
 
     /**
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): redirectresponse
     {
-        $remov = new User();
-          if($remov->remove($id)===true) {return redirect()
-        ->route('admin.users.index')
-        ->with('success', 'User has been deleted');}
-        else
-        {return redirect()
-            ->route('admin.users.index')
-            ->with('warning', 'this User cannot be deleted');}
+        $user = new User();
+        if ($user->remove($id) === true) {
+            return redirect()->route('admin.users.index')->with('success', 'User has been deleted');
+        } else {
+            return redirect()->route('admin.users.index')->with('warning', 'this User cannot be deleted');
+        }
     }
 }

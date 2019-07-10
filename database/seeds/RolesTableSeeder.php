@@ -3,9 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Role;
 
-/**
- * Class RolesTableSeeder
- */
+
 class RolesTableSeeder extends Seeder
 {
     /**
