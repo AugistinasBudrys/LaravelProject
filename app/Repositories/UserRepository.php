@@ -7,27 +7,47 @@ use App\User;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function find($user_id)
+    /**
+     * @param int $user_id
+     * @return User
+     */
+    public function find(int $user_id): User
     {
         return User::find($user_id);
     }
-    
+
+    /**
+     * @return User[]|\Illuminate\Database\Eloquent\Collection|mixed
+     */
     public function all()
     {
         return User::all();
     }
-    
-    public function delete($user_id)
+
+    /**
+     * @param int $user_id
+     * @return int|mixed
+     */
+    public function delete(int $user_id)
     {
         return User::destroy($user_id);
     }
-    
-    public function update($user_id, array $user_data)
+
+    /**
+     * @param int $user_id
+     * @param array $user_data
+     * @return User
+     */
+    public function update(int $user_id, array $user_data): User
     {
         return User::find($user_id)->update($user_data);
     }
-    
-    public function paginate(int $pag)
+
+    /**
+     * @param int $pag
+     * @return User
+     */
+    public function paginate(int $pag): User
     {
         return User::paginate($pag);
     }

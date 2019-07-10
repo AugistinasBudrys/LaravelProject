@@ -11,19 +11,18 @@ use App\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 
-//use App\Repositories\RoleRepositoryInterface;
-
-/**
- * Class UserController
- * @package App\Http\Controllers\Admin
- */
 class UserController extends Controller
 {
     /**
-     * @return View
+     * @var UserRepositoryInterface
      */
     public $user;
+    /**
+     * @var RoleRepositoryInterface
+     */
     public $role;
     
     /**
@@ -36,43 +35,45 @@ class UserController extends Controller
         $this->role = $role;
         
     }
-    
-    
-    public function index(): view
+
+    /**
+     * @return renderable
+     */
+    public function index(): renderable
     {
         return view('admin.users.index')->with('users', $this->user->paginate(10));
     }
-    
+
     /**
      * @param int $id
-     * @return View
+     * @return Renderable
      */
-    public function edit(int $id): view
+    public function edit(int $id): renderable
     {
         return view('admin.users.edit')->with(['user' => find($id), 'roles' => $this->role->all()]);
     }
-    
+
     /**
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         $user = $this->user->get($id);
         $user->roles()->sync($request->roles);
         
         return redirect()->route('admin.users.index')->with('success', 'User has been updated');
     }
-    
+
     /**
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
-        $remov = new User();
-        if ($remov->remove($id) === true) {
+        $user = new User();
+        if ($user->remove($id) === true) {
             return redirect()
                 ->route('admin.users.index')
                 ->with('success', 'User has been deleted');

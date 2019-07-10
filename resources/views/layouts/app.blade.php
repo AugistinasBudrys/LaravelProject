@@ -38,7 +38,6 @@
                     @hasrole('admin')
                     <li class="nav-item">
                         <a href="{{route('admin.users.index')}}">Manage Users</a>
-                        <a href="{{route('admin.events.index')}}">Manage Events</a>
                     </li>
                     @endhasrole
                 </ul>
