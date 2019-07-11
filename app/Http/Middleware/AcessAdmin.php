@@ -12,6 +12,8 @@ use Auth;
 class AcessAdmin
 {
     /**
+     * used to check if user has the admin role
+     *
      * @param $request
      * @param Closure $next
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed

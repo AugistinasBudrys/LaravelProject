@@ -5,10 +5,16 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 
+/**
+ * Class BladeExtrasServiceProvider
+ * @package App\Providers
+ */
 class BladeExtrasServiceProvider extends ServiceProvider
 {
+    /**
+     * No set return type does not always return bool type
+     */
     public function boot()
     {
         Blade::if('hasrole', function ($expression) {

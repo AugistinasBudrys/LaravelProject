@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Contract;
 
+/**
+ * Interface UserRepositoryInterface
+ * @package App\Repositories
+ */
 interface UserRepositoryInterface
 {
     /**
@@ -9,6 +13,12 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function find(int $user_id);
+
+    /**
+     * @param int $user_id
+     * @return mixed
+     */
+    public function get(int $user_id);
 
     /**
      * @return mixed
@@ -19,7 +29,7 @@ interface UserRepositoryInterface
      * @param int $user_id
      * @return mixed
      */
-    public function delete(int $user_id);
+    public function remove(int $user_id);
 
     /**
      * @param int $user_id
@@ -33,4 +43,10 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function paginate(int $pag);
+
+    /**
+     * @param array $user_data
+     * @return mixed
+     */
+    public function create(array $user_data);
 }

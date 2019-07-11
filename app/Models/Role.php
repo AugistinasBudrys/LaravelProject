@@ -1,22 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 /**
- * Class role
+ * Class Role
  * @package App
  */
-class role extends Model
+class Role extends Model
 {
     /**
      * @return BelongsToMany
      */
-    public function users():BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Models\User');
     }
 }

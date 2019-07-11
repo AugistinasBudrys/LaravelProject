@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\RoleRepositoryInterface;
-use App\Repositories\UserRepository;
+use App\Contract\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Role;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
-use App\Repositories\UserRepositoryInterface;
+use App\Contract\UserRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Admin
+ */
 class UserController extends Controller
 {
     /**
@@ -24,8 +23,9 @@ class UserController extends Controller
      * @var RoleRepositoryInterface
      */
     public $role;
-    
+
     /**
+     * UserController constructor.
      * @param UserRepositoryInterface $user
      * @param RoleRepositoryInterface $role
      */
@@ -33,54 +33,63 @@ class UserController extends Controller
     {
         $this->user = $user;
         $this->role = $role;
-        
     }
 
     /**
-     * @return renderable
+     * display user list
+     * View: admin/users/index.blade
+     *
+     * @return Renderable
      */
-    public function index(): renderable
+    public function index(): Renderable
     {
         return view('admin.users.index')->with('users', $this->user->paginate(10));
     }
 
     /**
+     * display edit list
+     * View: admin/users/edit.blade
+     *
      * @param int $id
      * @return Renderable
      */
-    public function edit(int $id): renderable
+    public function edit(int $id): Renderable
     {
-        return view('admin.users.edit')->with(['user' => find($id), 'roles' => $this->role->all()]);
+        return view('admin.users.edit')->with([
+            'user' => $this->user->find($id),
+            'roles' => $this->role->all()
+        ]);
     }
 
     /**
+     * updates the edited information in the database
+     *
      * @param Request $request
      * @param int $id
      * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $user = $this->user->get($id);
+        $user = $this->user->find($id);
         $user->roles()->sync($request->roles);
-        
+
         return redirect()->route('admin.users.index')->with('success', 'User has been updated');
     }
 
     /**
+     * destroy function used to remove entries from users and role_user tables
+     *
      * @param int $id
      * @return RedirectResponse
      */
     public function destroy(int $id): RedirectResponse
     {
-        $user = new User();
-        if ($user->remove($id) === true) {
+        if ($this->user->remove($id) === true)
             return redirect()
                 ->route('admin.users.index')
                 ->with('success', 'User has been deleted');
-        } else {
-            return redirect()
-                ->route('admin.users.index')
-                ->with('warning', 'this User cannot be deleted');
-        }
+        return redirect()
+            ->route('admin.users.index')
+            ->with('warning', 'this User cannot be deleted');
     }
 }

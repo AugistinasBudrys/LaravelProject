@@ -3,21 +3,19 @@
 
 namespace App\Repositories;
 
-use App\role;
+use App\Contract\RoleRepositoryInterface;
+use App\Models\Role;
 
+/**
+ * Class RoleRepository
+ * @package App\Repositories
+ */
 class RoleRepository implements RoleRepositoryInterface
 {
     /**
-     * @param int $role_id
-     * @return role
-     */
-    public function get(int $role_id): role
-    {
-        return Role::find($role_id);
-    }
-
-    /**
-     * @return role[]|\Illuminate\Database\Eloquent\Collection|mixed
+     * returns all
+     *
+     * @return Role[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
     public function all()
     {
@@ -25,21 +23,12 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * @param int $role_id
-     * @return int|mixed
+     * used in attaching user role to newly registered users
+     *
+     * @return string
      */
-    public function delete(int $role_id)
+    public function select(): string
     {
-        return Role::destroy($role_id);
-    }
-
-    /**
-     * @param int $role_id
-     * @param array $role_data
-     * @return role
-     */
-    public function update(int $role_id, array $role_data): role
-    {
-        return Role::find($role_id)->update($role_id);
+       return Role::select('id')->where('name', 'user')->first();
     }
 }
