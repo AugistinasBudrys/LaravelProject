@@ -19,10 +19,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Model::unguard();
+        $this->command->call('migrate:fresh');
+        $this->command->line('Fake data removed');
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->command->info('Users created!');
         $this->call(EventsTableSeeder::class);
+        $this->command->info('Events created');
         $this->call(RestaurantsTableSeeder::class);
+        $this->command->info('Restaurants created!');
         Model::reguard();
     }
 }

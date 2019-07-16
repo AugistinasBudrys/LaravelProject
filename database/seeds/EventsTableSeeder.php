@@ -28,7 +28,5 @@ class EventsTableSeeder extends Seeder
         $this->count = (int)$this->command->ask('How many Events do you need?', $this->count);
         $this->command->info("Creating {$this->count} Events.");
         factory(Event::class, $this->count)->create();
-        $this->command->info('Events created!');
-
     }
 }

@@ -28,7 +28,5 @@ class RestaurantsTableSeeder extends Seeder
         $this->count = (int)$this->command->ask('How many Restaurants do you need?', $this->count);
         $this->command->info("Creating {$this->count} Restaurants.");
         factory(Restaurant::class, $this->count)->create();
-        $this->command->info('Restaurants created!');
-
     }
 }
