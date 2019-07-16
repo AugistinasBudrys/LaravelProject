@@ -15,11 +15,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware'=>'auth.admin'], function(){
-    Route::get('/users','UserController@index')->name('users.index');
-    Route::put('/users/{user}', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
-    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'auth.admin'], function () {
+        Route::get('/users', 'UserController@index')->name('users.index');
+        Route::put('/users/{user}', 'UserController@update')->name('users.update');
+        Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+        Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+    });
     Route::post('/restaurants', 'DefaultController@index')->name('default.index');
     Route::get('/restaurants', 'DefaultController@index')->name('default.index');
     Route::get('/restaurants/create', 'DefaultController@index')->name('default.index');
