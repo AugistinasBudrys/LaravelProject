@@ -14,29 +14,30 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        User::truncate();
-        DB::table('role_user')->truncate();
+        private
+        $count = 10;
 
-        $adminRole = Role::where('name', 'admin')->first();
-        $userRole = Role::where('name', 'user')->first();
+        /**
+         * Run the conferences seeds.
+         *
+         * @return void
+         */
+        public
+        function run(): void
+        {
+            $adminRole =Role::where('name','admin')->first();
+            $admin = User::create([
+                'name'=>'admin',
+                'email'=>'admin@admin.com',
+                'password'=>bcrypt('admin')
+            ]);
+            $admin->roles()->attach($adminRole);
 
-        $admin = User::create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin')
-        ]);
-        $user = User::create([
-            'name' => 'user',
-            'email' => 'user@user.com',
-            'password' => bcrypt('user')
-        ]);
 
-        $admin->roles()->attach($adminRole);
-        $user->roles()->attach($userRole);
+            $this->count = (int)$this->command->ask('How many Users do you need?', $this->count);
+            $this->command->info("Creating {$this->count} Users.");
+            factory(User::class, $this->count)->create();
+            $this->command->info('Users created!');
 
-        factory(App\Models\User::class, 50)->create();
-
-    }
+        }
 }
