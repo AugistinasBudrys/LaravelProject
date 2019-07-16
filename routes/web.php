@@ -20,17 +20,16 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth','auth.admin'])->n
     Route::put('/users/{user}', 'UserController@update')->name('users.update');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
     Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-    // nera ideti controlleris bet pagal ideje sie routai reikalingi
-    /*Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
-    Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
-    Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
-    Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
-    Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
-    Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
-    Route::get('/events', 'EventController@index')->name('events.index');
-    Route::post('/events', 'EventController@store')->name('events.store');
-    Route::get('/events/create', 'EventController@create')->name('events.create');
-    Route::put('/events/{event}', 'EventController@update')->name('events.update');
-    Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
-    Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');*/
+    Route::post('/default', 'DefaultController@store')->name('default.store');
+    Route::get('/default', 'defaultController@index')->name('default.index');
+    Route::get('/default/create', 'defaultController@create')->name('default.create');
+    Route::delete('/default/{restaurant}', 'defaultController@destroy')->name('default.destroy');
+    Route::put('/default/{restaurant}', 'defaultController@update')->name('default.update');
+    Route::get('/default/{restaurant}/edit', 'defaultController@edit')->name('default.edit');
+    Route::get('/test', 'testController@index')->name('test.index');
+    Route::post('/test', 'testController@store')->name('test.store');
+    Route::get('/test/create', 'testController@create')->name('test.create');
+    Route::put('/test/{event}', 'testController@update')->name('test.update');
+    Route::delete('/test/{event}', 'testController@destroy')->name('test.destroy');
+    Route::get('/test/{event}/edit', 'testController@edit')->name('test.edit');
 });
