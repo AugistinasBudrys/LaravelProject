@@ -1,24 +1,25 @@
 <?php
 
+namespace App\Database\seeds;
+
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
 
 /**
  * Class UsersTableSeeder
+ * @package App\Database\seeds
  */
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * @var int
      */
         private
         $count = 10;
 
         /**
-         * Run the conferences seeds.
+         * Run the user seeds.
          *
          * @return void
          */
@@ -26,6 +27,8 @@ class UsersTableSeeder extends Seeder
         function run(): void
         {
             $adminRole =Role::where('name','admin')->first();
+
+            //TODO: redo
             $admin = User::create([
                 'name'=>'admin',
                 'email'=>'admin@admin.com',

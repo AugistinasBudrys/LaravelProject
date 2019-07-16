@@ -1,20 +1,24 @@
 <?php
 
+namespace App\Database\seeds;
+
 use Illuminate\Database\Seeder;
 use App\Models\Event;
 
+/**
+ * Class EventsTableSeeder
+ * @package App\Database\seeds
+ */
 class EventsTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * @var int
      */
     private
         $count = 10;
 
     /**
-     * Run the conferences seeds.
+     * Run the events seeds.
      *
      * @return void
      */
