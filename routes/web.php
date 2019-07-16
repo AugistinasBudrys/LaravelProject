@@ -11,19 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin',function(){
-    return 'you are admin';
-})->middleware(['auth','auth.admin']);
-
-
 
 Route::namespace('Admin')->prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function(){
-    Route::resource('/users','UserController', ['except'=>['show','create','store']]);
+    Route::get('/users','UserController@index')->name('users.index');
+    Route::put('/users/{user}', 'UserController@update')->name('users.update');
+    Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+    // nera ideti controlleris bet pagal ideje sie routai reikalingi
+    /*Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
+    Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
+    Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
+    Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
+    Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
+    Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
+    Route::get('/events', 'EventController@index')->name('events.index');
+    Route::post('/events', 'EventController@store')->name('events.store');
+    Route::get('/events/create', 'EventController@create')->name('events.create');
+    Route::put('/events/{event}', 'EventController@update')->name('events.update');
+    Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
+    Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');*/
 });
