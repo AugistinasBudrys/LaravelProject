@@ -3,6 +3,7 @@
 namespace App\Database\factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Models\Restaurant;
 use Faker\Generator as Faker;
 
@@ -22,7 +23,7 @@ $factory->define(Restaurant::class, function (Faker $faker) {
         'name' => $faker->word,
         'address' => $faker->address,
         'description' => $faker->text,
-        'work_time'=>$faker->time(),
-        'phone_number'=>$faker->phoneNumber
+        'work_time' => $faker->time(),
+        'phone_number' => $faker->phoneNumber
     ];
 });

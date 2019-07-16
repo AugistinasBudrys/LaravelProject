@@ -3,6 +3,7 @@
 namespace App\Database\factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Models\Event;
 use Faker\Generator as Faker;
 

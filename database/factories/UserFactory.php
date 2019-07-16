@@ -3,6 +3,7 @@
 namespace App\Database\factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -30,7 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
 
 });
 
-$factory->afterCreating(User::class, function($user){
-    $roles=Role::where('name','user')->get();
+$factory->afterCreating(User::class, function ($user) {
+    $roles = Role::where('name', 'user')->get();
     $user->roles()->sync($roles->pluck('id')->toArray());
 });
