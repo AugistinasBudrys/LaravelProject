@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class User
@@ -42,28 +41,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+    /**
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany('App\role');
-
+        return $this->belongsToMany('App\Models\Role');
     }
 
     /**
+     * used to find the role of a user
+     *
      * @param $role
      * @return bool
      */
-    public function hasAnyRole($role)
+    public function hasAnyRole($role): bool
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
 
     /**
-     * @param $id
+     * removes user from users table and detaches role from role_user table
+     *
+     * @param int $id
      * @return bool
      */
-    public function Remove($id)
+    public function Remove(int $id): bool
     {
-        $user = User::find($id);
+        $user = $this->find($id);
         if ($user) {
             $user->roles()->detach();
             $user->delete();

@@ -20,7 +20,7 @@
                             <tbody>
                             @foreach($users as $user)
                                 <tr>
-                                    @if($user->hasAnyRole('user'))
+                                    @if($user->hasAnyRole('admin')!='user')
                                         <th>{{ $user->name }}</th>
                                         <th>{{ $user->email }}</th>
                                         <th>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray()) }}</th>

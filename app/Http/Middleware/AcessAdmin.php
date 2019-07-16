@@ -5,16 +5,21 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
+/**
+ * Class AcessAdmin
+ * @package App\Http\Middleware
+ */
 class AcessAdmin
 {
     /**
+     * used to check if user has the admin role
+     *
      * @param $request
      * @param Closure $next
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
     public function handle($request, Closure $next)
     {
-        //Auth::user()->hasAnyRole('admin');
         if(Auth::user()->hasAnyRole(['admin'])){
             return $next($request);
         }

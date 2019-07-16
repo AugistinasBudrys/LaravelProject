@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\role;
 use App\Http\Controllers\Controller;
+use App\Contract\RoleRepositoryInterface;
+use App\Contract\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\User;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -25,6 +30,16 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
+     * @var
+     */
+    public $user;
+
+    /**
+     * @var
+     */
+    public $role;
+
+    /**
      * Where to redirect users after registration.
      *
      * @var string
@@ -32,19 +47,19 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * RegisterController constructor.
+     * @param UserRepositoryInterface $user
+     * @param RoleRepositoryInterface $role
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $user, RoleRepositoryInterface $role)
     {
+        $this->user = $user;
+        $this->role = $role;
         $this->middleware('guest');
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -57,18 +72,20 @@ class RegisterController extends Controller
     }
 
     /**
+     * used to register users and attach the user role to them
+     *
      * @param array $data
-     * @return mixed
+     * @return User
      */
-    protected function create(array $data)
+    public function create(array $data): User
     {
-        $user = User::create([
+        $user = $this->user->create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $role=Role::select('id')->where('name', 'user')->first();
+        $role = $this->role->select();
 
         $user->roles()->attach($role);
 

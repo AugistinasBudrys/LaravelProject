@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
-use App\Role;
+use App\Models\User;
+use App\Models\Role;
 
 /**
  * Class UsersTableSeeder
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
         $admin->roles()->attach($adminRole);
         $user->roles()->attach($userRole);
 
-        factory(App\User::class, 50)->create();
+        factory(App\Models\User::class, 50)->create();
 
     }
 }

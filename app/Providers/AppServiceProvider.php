@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     /**
@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // be sitos  israiskos meta SQLSTATE[42000]: Syntax error or access violation bandant migratint duomenu baze
         Schema::defaultStringLength(191);
     }
 }
