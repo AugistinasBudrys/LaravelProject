@@ -67,7 +67,7 @@ class User extends Authenticatable
      * @param int $id
      * @return bool
      */
-    public function Remove(int $id): bool
+    public function remove(int $id): bool
     {
         $user = $this->find($id);
         if ($user) {

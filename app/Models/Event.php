@@ -23,7 +23,7 @@ class Event extends Model
     /**
      * @return BelongsToMany
      */
-    public function event_Users(): BelongsToMany
+    public function eventUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
@@ -42,11 +42,11 @@ class Event extends Model
      * @param int $id
      * @return bool
      */
-    public function remove_Event( int $id): bool
+    public function removeEvent( int $id): bool
     {
         $event = $this->find($id);
         if ($event) {
-            $event->event_Users()->detach();
+            $event->eventUsers()->detach();
             $event->restaurants()->detach();
             $event->delete();
             return true;

@@ -25,7 +25,7 @@ class Restaurant extends Model
     /**
      * @return BelongsToMany
      */
-    public function event_Restaurants(): BelongsToMany
+    public function eventRestaurants(): BelongsToMany
     {
         return $this->belongsToMany(Event::class);
     }
@@ -36,11 +36,11 @@ class Restaurant extends Model
      * @param int $id
      * @return bool
      */
-    public function remove_Restaurant(int $id): bool
+    public function removeRestaurant(int $id): bool
     {
         $restaurant = $this->find($id);
         if ($restaurant) {
-            $restaurant->event_Restaurants()->detach();
+            $restaurant->eventRestaurants()->detach();
             $restaurant->delete();
             return true;
         }
