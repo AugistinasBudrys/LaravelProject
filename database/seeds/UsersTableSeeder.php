@@ -6,37 +6,34 @@ use App\Models\Role;
 
 /**
  * Class UsersTableSeeder
+ * @package App\Database\seeds
  */
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * @var int
+     */
+    private
+        $count = 10;
+
+    /**
+     * Run the user seeds.
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        User::truncate();
-        DB::table('role_user')->truncate();
-
         $adminRole = Role::where('name', 'admin')->first();
-        $userRole = Role::where('name', 'user')->first();
 
+        //TODO: redo
         $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin')
         ]);
-        $user = User::create([
-            'name' => 'user',
-            'email' => 'user@user.com',
-            'password' => bcrypt('user')
-        ]);
-
         $admin->roles()->attach($adminRole);
-        $user->roles()->attach($userRole);
-
-        factory(App\Models\User::class, 50)->create();
-
+        $this->count = (int)$this->command->ask('How many Users do you need?', $this->count);
+        $this->command->info("Creating {$this->count} Users.");
+        factory(User::class, $this->count)->create();
     }
 }
