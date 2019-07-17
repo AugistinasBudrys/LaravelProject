@@ -16,7 +16,7 @@ interface RoleRepositoryInterface
     public function all();
 
     /**
-     * @return int
+     * @return Role
      */
-    public function select(): int;
+    public function select(): Role;
 }

@@ -24,9 +24,9 @@ class RoleRepository implements RoleRepositoryInterface
     /**
      * Used in attaching user role to newly registered users
      *
-     * @return int
+     * @return Role
      */
-    public function select(): int
+    public function select(): Role
     {
         return Role::select('id')->where('name', 'user')->first();
     }
