@@ -8,28 +8,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class User
- * @package App
+ * @package App\Models
  */
 class User extends Authenticatable
 {
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * attributes hidden for arrays
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token'
     ];
 
     /**
@@ -38,7 +39,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime'
     ];
 
     /**
@@ -46,7 +47,7 @@ class User extends Authenticatable
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**

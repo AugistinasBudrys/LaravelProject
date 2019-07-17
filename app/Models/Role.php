@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Role
- * @package App
+ * @package App\Models
  */
 class Role extends Model
 {
@@ -17,6 +17,6 @@ class Role extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany(User::class);
     }
 }
