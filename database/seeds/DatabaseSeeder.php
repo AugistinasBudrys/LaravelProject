@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Database\seeds;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->command->call('migrate:fresh');
         $this->command->line('Fake data removed');
         $this->call(RolesTableSeeder::class);
+        $this->command->info('Roles created');
         $this->call(UsersTableSeeder::class);
         $this->command->info('Users created!');
         $this->call(EventsTableSeeder::class);
