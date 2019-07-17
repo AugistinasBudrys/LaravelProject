@@ -2,19 +2,21 @@
 
 namespace App\Contract;
 
+use App\Models\Role;
+
 /**
  * Interface RoleRepositoryInterface
- * @package App\Repositories
+ * @package App\Contract
  */
 interface RoleRepositoryInterface
 {
     /**
-     * @return mixed
+     * @return Role[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
     public function all();
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function select();
+    public function select(): int;
 }

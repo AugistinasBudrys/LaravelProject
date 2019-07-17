@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Contract\RoleRepositoryInterface;
@@ -13,7 +12,7 @@ use App\Models\Role;
 class RoleRepository implements RoleRepositoryInterface
 {
     /**
-     * returns all
+     * Returns all roles
      *
      * @return Role[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
@@ -23,12 +22,12 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * used in attaching user role to newly registered users
+     * Used in attaching user role to newly registered users
      *
-     * @return string
+     * @return int
      */
-    public function select(): string
+    public function select(): int
     {
-       return Role::select('id')->where('name', 'user')->first();
+        return Role::select('id')->where('name', 'user')->first();
     }
 }
