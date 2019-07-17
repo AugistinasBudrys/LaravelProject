@@ -8,28 +8,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class User
- * @package App
+ * @package App\Models
  */
 class User extends Authenticatable
 {
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Attributes hidden for arrays
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token'
     ];
 
     /**
@@ -38,7 +39,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime'
     ];
 
     /**
@@ -46,27 +47,27 @@ class User extends Authenticatable
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
-     * used to find the role of a user
+     * Used to find the role of a user
      *
-     * @param $role
+     * @param string $role
      * @return bool
      */
-    public function hasAnyRole($role): bool
+    public function hasAnyRole(string $role): bool
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
 
     /**
-     * removes user from users table and detaches role from role_user table
+     * Removes user from users table and detaches role from role_user table
      *
      * @param int $id
      * @return bool
      */
-    public function Remove(int $id): bool
+    public function remove(int $id): bool
     {
         $user = $this->find($id);
         if ($user) {
