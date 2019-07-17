@@ -20,9 +20,19 @@ class AcessAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->hasAnyRole(['admin'])){
-            return $next($request);
+        $isAdmin = false;
+        if (Auth::user()->hasAnyRole(['admin'])) {
+            $isAdmin = true;
         }
-        return redirect('home');
+
+        if (!$isAdmin) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->back();
+            }
+        }
+
+        return $next($request);
     }
 }
