@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * attributes hidden for arrays
+     * Attributes hidden for arrays
      *
      * @var array
      */
@@ -51,18 +51,18 @@ class User extends Authenticatable
     }
 
     /**
-     * used to find the role of a user
+     * Used to find the role of a user
      *
-     * @param $role
+     * @param string $role
      * @return bool
      */
-    public function hasAnyRole($role): bool
+    public function hasAnyRole(string $role): bool
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
 
     /**
-     * removes user from users table and detaches role from role_user table
+     * Removes user from users table and detaches role from role_user table
      *
      * @param int $id
      * @return bool

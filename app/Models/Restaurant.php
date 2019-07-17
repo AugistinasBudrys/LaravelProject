@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Restaurant extends Model
 {
     /**
-     * @var array 
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -25,22 +25,22 @@ class Restaurant extends Model
     /**
      * @return BelongsToMany
      */
-    public function event_restaurants(): BelongsToMany
+    public function event_Restaurants(): BelongsToMany
     {
         return $this->belongsToMany(Event::class);
     }
 
     /**
-     * function used to remove events from database
+     * Function used to remove events from database
      *
-     * @param $id
+     * @param int $id
      * @return bool
      */
-    public function Remove_restaurant($id): bool
+    public function remove_Restaurant(int $id): bool
     {
         $restaurant = $this->find($id);
         if ($restaurant) {
-            $restaurant->event_restaurants()->detach();
+            $restaurant->event_Restaurants()->detach();
             $restaurant->delete();
             return true;
         }
