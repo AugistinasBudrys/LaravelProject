@@ -2,51 +2,54 @@
 
 namespace App\Contract;
 
+use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 /**
  * Interface UserRepositoryInterface
- * @package App\Repositories
+ * @package App\Contract
  */
 interface UserRepositoryInterface
 {
     /**
-     * @param int $user_id
-     * @return mixed
+     * @param int $userId
+     * @return User
      */
-    public function find(int $user_id);
+    public function find(int $userId): User;
 
     /**
-     * @param int $user_id
-     * @return mixed
+     * @param int $userId
+     * @return User
      */
-    public function get(int $user_id);
+    public function get(int $userId): User;
 
     /**
-     * @return mixed
+     * @return User[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
     public function all();
 
     /**
-     * @param int $user_id
-     * @return mixed
+     * @param int $userId
+     * @return bool
      */
-    public function remove(int $user_id);
+    public function remove(int $userId): bool;
 
     /**
-     * @param int $user_id
-     * @param array $user_data
-     * @return mixed
+     * @param int $userId
+     * @param array $userData
+     * @return User
      */
-    public function update(int $user_id, array $user_data);
+    public function update(int $userId, array $userData): User;
 
     /**
      * @param int $pag
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function paginate(int $pag);
+    public function paginate(int $pag): LengthAwarePaginator;
 
     /**
-     * @param array $user_data
-     * @return mixed
+     * @param array $userData
+     * @return User
      */
-    public function create(array $user_data);
+    public function create(array $userData): User;
 }

@@ -16,22 +16,23 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/events', 'EventController@index')->name('events.index');
+    Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
+
     Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
         Route::put('/users/{user}', 'UserController@update')->name('users.update');
         Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
         Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+        Route::post('/events', 'EventController@store')->name('events.store');
+        Route::get('/events/create', 'EventController@create')->name('events.create');
+        Route::put('/events/{event}', 'EventController@update')->name('events.update');
+        Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
+        Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
+        Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
+        Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
+        Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
+        Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
+        Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
     });
-    Route::post('/restaurants', 'DefaultController@index')->name('default.index');
-    Route::get('/restaurants', 'DefaultController@index')->name('default.index');
-    Route::get('/restaurants/create', 'DefaultController@index')->name('default.index');
-    Route::delete('/restaurants/{restaurant?}', 'DefaultController@index')->name('default.index');
-    Route::put('/restaurants/{restaurant?}', 'DefaultController@index')->name('default.index');
-    Route::get('/restaurants/{restaurant?}/edit', 'DefaultController@index')->name('default.index');
-    Route::get('/events', 'DefaultController@index')->name('default.index');
-    Route::post('/events', 'DefaultController@index')->name('default.index');
-    Route::get('/events/create', 'DefaultController@index')->name('default.index');
-    Route::put('/events/{event?}', 'DefaultController@index')->name('default.index');
-    Route::delete('/events/{event?}', 'DefaultController@index')->name('default.index');
-    Route::get('/events/{event?}/edit', 'DefaultController@index')->name('default.index');
 });
