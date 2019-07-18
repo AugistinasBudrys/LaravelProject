@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Event
@@ -19,6 +20,34 @@ class Event extends Model
         'name',
         'description'
     ];
+
+    /**
+     * @return string
+     */
+    public function getDateAttribute(): string
+    {
+        return $this->attributes['date'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameAttribute(): string
+    {
+        return $this->attributes['name'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionAttribute(): string
+    {
+        return $this->attributes['description'];
+    }
+    public function setDateAttribute()
+    {
+        $this->get()->sortBy('date');
+    }
 
     /**
      * @return BelongsToMany
