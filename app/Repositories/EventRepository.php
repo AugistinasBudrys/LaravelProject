@@ -4,8 +4,10 @@ namespace App\Repositories;
 
 use App\Contract\EventRepositoryInterface;
 use App\Models\Event;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 /**
  * Class EventRepository
@@ -30,9 +32,9 @@ class EventRepository implements EventRepositoryInterface
      * @param int $eventId
      * @return bool
      */
-    public function removeEvent(int $eventId): bool
+    public function deleteEvent(int $eventId): bool
     {
-        $event = new Event();
+        $event = Event::find($eventId);
         return $event->removeEvent($eventId);
     }
 
@@ -45,5 +47,23 @@ class EventRepository implements EventRepositoryInterface
     public function create(Request $request): Event
     {
         return Event::create($request->all());
+    }
+
+    /**
+     * @param int $id
+     * @return Event
+     */
+    public function find(int $id): Event
+    {
+        return Event::find($id);
+    }
+
+    /**
+     * @param int $num
+     * @return Collection
+     */
+    public function getEvents(): Collection
+    {
+       return Event::take(4)->where('date', '>=', Carbon::now()->toDateString())->get()->sortBy('date');
     }
 }

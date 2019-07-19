@@ -44,7 +44,7 @@ class EventController extends Controller
      */
     public function index(): Renderable
     {
-        return view('events.index')->with('events', $this->event->paginate(10));
+        return view('events.index', ['events'=>$this->event->getEvents()]);
     }
 
     /**
@@ -55,7 +55,7 @@ class EventController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        if ($this->event->removeEvent($id) === true)
+        if ($this->event->deleteEvent($id) === true)
             return redirect()
                 ->route('events.index')
                 ->with('success', 'Event has been deleted');
@@ -123,5 +123,4 @@ class EventController extends Controller
 
         return redirect()->route('events.index');
     }
-
 }
