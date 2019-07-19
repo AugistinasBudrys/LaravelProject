@@ -44,7 +44,7 @@ class EventController extends Controller
      */
     public function index(): Renderable
     {
-        return view('events.index', ['events'=>$this->event->getEvents()]);
+        return view('events.index', ['events' => $this->event->getEvents()]);
     }
 
     /**
@@ -89,6 +89,8 @@ class EventController extends Controller
             'description' => 'required'
         ]);
 
+        $this->event->create($request);
+
         return redirect()->route('events.index');
     }
 
@@ -122,5 +124,13 @@ class EventController extends Controller
         $event->update($request->all());
 
         return redirect()->route('events.index');
+    }
+
+    /**
+     * @return Renderable
+     */
+    public function moreInfo(): Renderable
+    {
+        return view('events.moreInfo');
     }
 }

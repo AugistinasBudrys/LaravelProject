@@ -46,6 +46,33 @@ class Event extends Model
     }
 
     /**
+     * @param string $date
+     * @return void
+     */
+    public function setDateAttribute(string $date): void
+    {
+        $this->attributes['date'] = preg_replace("/date/", "", $date);
+    }
+
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setNameAttribute(string $name): void
+    {
+        $this->attributes['name'] = preg_replace("/string/", "", $name);
+    }
+
+    /**
+     * @param string $description
+     * @return void
+     */
+    public function setDescriptionAttribute(string $description): void
+    {
+        $this->attributes['description'] = preg_replace("/string/", "", $description);
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function eventUsers(): BelongsToMany
@@ -67,7 +94,7 @@ class Event extends Model
      * @param int $id
      * @return bool
      */
-    public function removeEvent( int $id): bool
+    public function removeEvent(int $id): bool
     {
         $event = $this->find($id);
         if ($event) {
