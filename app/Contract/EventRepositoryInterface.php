@@ -41,5 +41,5 @@ interface EventRepositoryInterface
      * @param int $num
      * @return Collection
      */
-    public function getEvents(): Collection;
+    public function getEvents(int $num): Collection;
 }

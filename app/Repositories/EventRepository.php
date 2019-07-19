@@ -62,8 +62,8 @@ class EventRepository implements EventRepositoryInterface
      * @param int $num
      * @return Collection
      */
-    public function getEvents(): Collection
+    public function getEvents(int $num): Collection
     {
-       return Event::take(4)->where('date', '>=', Carbon::now()->toDateString())->get()->sortBy('date');
+       return Event::take($num)->where('date', '>=', Carbon::now()->toDateString())->get()->sortBy('date');
     }
 }
