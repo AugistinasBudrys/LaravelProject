@@ -44,8 +44,7 @@ class EventController extends Controller
      */
     public function index(): Renderable
     {
-        $num = 4;
-        return view('events.index', ['events'=>$this->event->getEvents($num)]);
+        return view('events.index', ['events'=>$this->event->getEvents()]);
     }
 
     /**

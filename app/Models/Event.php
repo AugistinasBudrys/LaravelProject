@@ -44,10 +44,6 @@ class Event extends Model
     {
         return $this->attributes['description'];
     }
-    public function setDateAttribute()
-    {
-        $this->get()->sortBy('date');
-    }
 
     /**
      * @return BelongsToMany
