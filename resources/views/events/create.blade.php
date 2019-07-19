@@ -28,7 +28,7 @@
                                 <div class="form-group col">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" style="height:150px" name="description" placeholder="description"></textarea>
+                                            <textarea class="form-control" name="description" placeholder="description"></textarea>
                                         </div>
                                     </div>
                                 </div>

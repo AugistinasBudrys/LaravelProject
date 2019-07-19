@@ -2,13 +2,11 @@
 
 @section('content')
     @hasrole('admin')
-    <div class="container">
         <div class="row align-items-right col-md-12 text-right">
         <a href="{{route('events.create')}}" class="float-right">
-            <button type="button" style="float:right" class="btn btn-primary">Create Event</button>
+            <button type="button" class="btn btn-primary">Create Event</button>
         </a>
         </div>
-    </div>
     @endhasrole
     <div class="row align-items-center my-6">
         <div class="col-md-12">
