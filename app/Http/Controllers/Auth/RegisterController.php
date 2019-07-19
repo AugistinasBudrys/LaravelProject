@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Contract\RoleRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator as Validation;
+use Illuminate\Validation\Validator;
+
 
 /**
  * Class RegisterController
@@ -62,9 +64,9 @@ class RegisterController extends Controller
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
-        return Validator::make($data, [
+        return Validation::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -79,15 +81,8 @@ class RegisterController extends Controller
      */
     public function create(array $data): User
     {
-        $user = $this->user->create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        $role = $this->role->select();
-
-        $user->roles()->attach($role);
+        $user = $this->user->create($data);
+        $user->roles()->attach(2);
 
         return $user;
     }

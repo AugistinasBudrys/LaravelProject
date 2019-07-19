@@ -22,17 +22,17 @@
 
 </head>
 <body>
-<div id="app">
+<div id="app" class="fbody"> <!--style="min-height: 90vh">-->
 
 
-    <!--<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<!--<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -50,19 +50,19 @@
                 <ul class="navbar-nav ml-auto">
                      Authentication Links
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+@else
+    <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+{{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -70,38 +70,27 @@
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
-                                </a>
+            </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+            <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                       style="display: none;">
                                     @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+            </form>
         </div>
-    </nav>-->
-
-
-
-        @include('partials.alerts')
-        @include('partials.header')
-
-        @yield('content')
-
-
-
-        <footer class="site-footer">
-            <div class="container">
-
-
-            <h2>Laravel</h2>
-            </div>
-        </footer>
-
-
+    </li>
+@endguest
+        </ul>
+    </div>
 </div>
+</nav>-->
+
+
+    @include('partials.alerts')
+    @include('partials.header')
+
+    @yield('content')
+</div>
+@include('partials.footer')
+
 </body>
 </html>

@@ -2,10 +2,12 @@
 
 
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-secondary">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
-        </a>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light" id="nav-border">
+        <div class="container">
+
+            <a  id="anav" class="navbar-brand" href="{{ url('/') }}">VGTU DEMO</a>
+
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,13 +24,11 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}<span
-                                    class="sr-only">(current)</span></a>
+                        <a id="log" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}<span
-                                        class="sr-only">(current)</span></a></a>
+                            <a id="reg" class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else

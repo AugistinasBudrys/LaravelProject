@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="modal-dialog text-center">
+    <div class="modal-dialog text-center login-form">
         <div class="col-sm-9 main-section" id="login-center">
             <div class="modal-content" id="modal-content-login">
                 <h2 id="login">Login</h2>

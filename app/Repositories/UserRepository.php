@@ -87,7 +87,7 @@ class UserRepository implements UserRepositoryInterface
      * @param array $user_data
      * @return array
      */
-    public function create(array $user_data): array
+    public function create(array $user_data): User
     {
         return User::create([
             'name' => $user_data['name'],
