@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class Event
@@ -51,7 +50,7 @@ class Event extends Model
      */
     public function setDateAttribute(string $date): void
     {
-        $this->attributes['date'] = preg_replace("/date/", "", $date);
+        $this->attributes['date'] = str_replace("/date/", "", $date);
     }
 
     /**
@@ -60,7 +59,7 @@ class Event extends Model
      */
     public function setNameAttribute(string $name): void
     {
-        $this->attributes['name'] = preg_replace("/string/", "", $name);
+        $this->attributes['name'] = str_replace("/string/", "", $name);
     }
 
     /**
@@ -69,7 +68,7 @@ class Event extends Model
      */
     public function setDescriptionAttribute(string $description): void
     {
-        $this->attributes['description'] = preg_replace("/string/", "", $description);
+        $this->attributes['description'] = str_replace("/string/", "", $description);
     }
 
     /**

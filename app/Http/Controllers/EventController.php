@@ -55,10 +55,10 @@ class EventController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        if ($this->event->deleteEvent($id) === true)
+        if ($this->event->deleteEvent($id) === true) {
             return redirect()
                 ->route('events.index')
-                ->with('success', 'Event has been deleted');
+                ->with('success', 'Event has been deleted');}
         return redirect()
             ->route('events.index')
             ->with('warning', 'This event cannot be deleted');
