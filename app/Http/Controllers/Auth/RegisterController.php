@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Contract\RoleRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator as Validation;
-use Illuminate\Validation\Validator;
 
 
 /**
@@ -74,7 +72,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * used to register users and attach the user role to them
+     * Used to register users and attach the user role to them
      *
      * @param array $data
      * @return User
@@ -82,7 +80,8 @@ class RegisterController extends Controller
     public function create(array $data): User
     {
         $user = $this->user->create($data);
-        $user->roles()->attach(2);
+        $role = $this->role->select();
+        $user->roles()->attach($role);
 
         return $user;
     }

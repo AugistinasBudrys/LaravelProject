@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Contract\UserRepositoryInterface;
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository implements UserRepositoryInterface
 {
     /**
-     * finds the id and returns it
+     * Finds the id and returns it
      *
      * @param int $user_id
      * @return User
@@ -26,7 +25,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * gets the id and returns it
+     * Gets the id and returns it
      *
      * @param int $user_id
      * @return User
@@ -37,7 +36,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * returns all users
+     * Returns all users
      *
      * @return User[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
@@ -47,19 +46,19 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * used in deleting a user and his related role entry
+     * Used in deleting a user and his related role entry
      *
      * @param int $user_id
-     * @return bool|mixed
+     * @return bool
      */
-    public function remove(int $user_id)
+    public function remove(int $user_id): bool
     {
         $user = new User();
         return $user->remove($user_id);
     }
 
     /**
-     * used in updating users roles in database
+     * Used in updating users roles in database
      *
      * @param int $user_id
      * @param array $user_data
@@ -71,7 +70,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * used for limiting the amount of users seen on screen
+     * Used for limiting the amount of users seen on screen
      *
      * @param int $pag
      * @return LengthAwarePaginator
@@ -82,17 +81,17 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * used in new user registration
+     * Used in new user registration
      *
      * @param array $user_data
-     * @return array
+     * @return User
      */
     public function create(array $user_data): User
     {
         return User::create([
             'name' => $user_data['name'],
             'email' => $user_data['email'],
-            'password' => Hash::make($user_data['password']),
+            'password' => Hash::make($user_data['password'])
         ]);
     }
 }

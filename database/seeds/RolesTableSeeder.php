@@ -5,6 +5,7 @@ use App\Models\Role;
 
 /**
  * Class RolesTableSeeder
+ * @package App\Database\seeds
  */
 class RolesTableSeeder extends Seeder
 {
@@ -13,10 +14,8 @@ class RolesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        Role::truncate();
-
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'user']);
     }
