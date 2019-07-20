@@ -9,7 +9,6 @@
                     </div>
                     <div class="card-body">
                         <form action="{{route('events.store')}}" method="POST" >
-                            <table class="align-items-center" table>
                                 @csrf
                                 <div class="form-group col">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -35,7 +34,6 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                            </table>
                         </form>
                     </div>
                 </div>

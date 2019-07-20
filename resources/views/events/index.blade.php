@@ -8,6 +8,7 @@
         </a>
         </div>
     @endhasrole
+    @if($events->first() !== null)
     <div class="row align-items-center my-6">
         <div class="col-md-12">
             <h1 class="font-weight-light">{{$events->first()->name}}
@@ -38,7 +39,7 @@
     <div class="container">
         <div class="row col-md-12">
             @foreach($events as $event)
-                @if($events->first()->name != $event->name)
+                @if($events->first()->id !== $event->id)
                     <div class="col-md-4 event-padding-block">
                         <div class="card mb-4 h-100">
                             <div class="card-body">
@@ -54,5 +55,7 @@
             @endforeach
         </div>
     </div>
-    </div>
+    @else
+        <p class="text-black-50 m-0">No events could be found</p>
+    @endif
 @endsection
