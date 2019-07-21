@@ -7,8 +7,11 @@
 
             <div class="col-md-9">
 
-                <!-- Pavadinimas -->
-                <h2 class="m-2">Restorano pavadinimas</h2>
+                <!-- Pavadinimas ir Join mygtukas -->
+                <div class="d-md-flex justify-content-between">
+                    <h2 class="m-2">Restorano pavadinimas</h2>
+                    <button type="button" class="btn btn-primary btn-sm my-2">Join</button>
+                </div>
 
                 <hr>
                 <!-- Date -->
@@ -20,7 +23,7 @@
                 <hr>
 
                 <!-- 5 smaller images -->
-                <div class="d-flex align-items-start">
+                <div class="d-md-flex align-items-start">
                     <div class="p-2"><img class="img-fluid " src="http://placehold.it/900x300" alt=""></div>
                     <div class="p-2"><img class="img-fluid " src="http://placehold.it/900x300" alt=""></div>
                     <div class="p-2"><img class="img-fluid " src="http://placehold.it/900x300" alt=""></div>
@@ -66,7 +69,7 @@
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-lg-3">
 
                 <!-- Administratoriaus veikla -->
                 <div class="card m-2">
