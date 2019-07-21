@@ -123,4 +123,9 @@ class EventController extends Controller
 
         return redirect()->route('events.index');
     }
+    
+    public function moreInfo()
+    {
+        return view('events.description');
+    }
 }

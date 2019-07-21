@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', 'EventController@index')->name('events.index');
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
+    Route::get('/events/moreinfo', 'EventController@moreInfo')->name('events.description');
 
     Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
