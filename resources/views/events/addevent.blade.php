@@ -7,7 +7,7 @@
 
             <div class="col-md-12">
 
-                <h2 class="mt-4">Add event</h2>
+                <h2 class="mt-4">Add Event</h2>
 
                 <hr>
 
