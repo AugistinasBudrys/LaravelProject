@@ -143,6 +143,22 @@ class EventController extends Controller
 
         return redirect()->route('events.index');
     }
+<<<<<<< HEAD
+    
+    public function moreInfo()
+    {
+        return view('events.description');
+    }
+    
+    public function add()
+    {
+        return view('events.addevent');
+    }
+    
+    public function r_create()
+    {
+        return view('events.create');
+=======
 
     /**
      * returns event description view
@@ -174,20 +190,6 @@ class EventController extends Controller
         return redirect()->route('events.description', [
             'event' => $this->event->find($event_id)
         ])->with('success', 'you have successfully joined \(*.*)/');
-    }
-    
-    public function moreInfo()
-    {
-        return view('events.description');
-    }
-    
-    public function add()
-    {
-        return view('events.addevent');
-    }
-    
-    public function r_create()
-    {
-        return view('events.create');
+>>>>>>> origin/task-#16
     }
 }

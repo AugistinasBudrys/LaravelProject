@@ -52,4 +52,9 @@ interface UserRepositoryInterface
      * @return User
      */
     public function create(array $userData): User;
+
+    /**
+     * @return User
+     */
+    public function current(): User;
 }

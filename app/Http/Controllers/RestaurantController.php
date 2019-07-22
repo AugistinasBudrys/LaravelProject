@@ -55,10 +55,11 @@ class RestaurantController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        if ($this->restaurant->removeRestaurant($id) === true)
+        if ($this->restaurant->removeRestaurant($id) === true) {
             return redirect()
                 ->route('restaurants.index')
                 ->with('success', 'Restaurant has been deleted');
+        }
         return redirect()
             ->route('restaurants.index')
             ->with('warning', 'This restaurant cannot be deleted');
@@ -87,8 +88,10 @@ class RestaurantController extends Controller
             'name' => 'required',
             'address' => 'required',
             'description' => 'required',
-            'work_time' => 'required',
-            'phone_number' => 'required'
+            'work_time_from' => 'required',
+            'work_time_to' => 'required',
+            'phone_number' => 'required',
+            'URL' => 'required'
         ]);
 
         $this->restaurant->create($request);
@@ -130,4 +133,19 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index');
     }
 
+    /**
+     * @param int $restaurant_id
+     * @param int $event_id
+     * @return RedirectResponse
+     */
+    public function add(int $restaurant_id, int $event_id): RedirectResponse
+    {
+        $restaurant = $this->restaurant->find($restaurant_id);
+        $restaurant->eventRestaurants()->attach($event_id);
+
+        return redirect()->route('events.description', [
+            'event' => $this->event->find($event_id),
+            'restaurants' => $this->restaurant->all()
+        ]);
+    }
 }

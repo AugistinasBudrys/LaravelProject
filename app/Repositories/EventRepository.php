@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Auth;
 
 /**
  * Class EventRepository
@@ -62,8 +63,25 @@ class EventRepository implements EventRepositoryInterface
      * @param int $num
      * @return Collection
      */
-    public function getEvents(): Collection
+    public function getEvents(int $num): Collection
     {
-       return Event::take(4)->where('date', '>=', Carbon::now()->toDateString())->get()->sortBy('date');
+        return Event::get()
+            ->where('date', '>=', Carbon::now()->toDateString())
+            ->sortBy('date')
+            ->take($num);
+    }
+
+    public function joinEvent(int $event_id)
+    {
+        $event = Event::find($event_id);
+        $user = Auth::User();
+
+        if ($event->eventUsers->contains($user) === true) {
+            $event->eventUsers()->detach($user);
+            return true;
+        }
+
+        $event->eventUsers()->attach($user);
+        return false;
     }
 }

@@ -21,7 +21,7 @@
                 <div class="row col-md-12">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item">
-                            <a href="{{route('events.restaurantDescription')}}" class="float-left">
+                            <a href="" class="float-left">
                                 <button type="button" class="btn btn-primary">More info</button>
                             </a>
                         </li>
@@ -46,7 +46,7 @@
                                     <p class="card-text">{{$event->description}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{route('events.restaurantDescription')}}" class="btn btn-primary btn-sm">More Info</a>
+                                    <a href="" class="btn btn-primary btn-sm">More Info</a>
                                 </div>
                             </div>
                         </div>
