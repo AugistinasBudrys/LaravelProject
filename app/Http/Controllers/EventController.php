@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contract\RestaurantRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Contract\EventRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
+use Auth;
 
 /**
  * Class EventController
@@ -26,14 +28,25 @@ class EventController extends Controller
     public $user;
 
     /**
+     * @var RestaurantRepositoryInterface
+     */
+    public $restaurant;
+
+    /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
      * @param UserRepositoryInterface $user
+     * @param RestaurantRepositoryInterface $restaurant
      */
-    public function __construct(EventRepositoryInterface $event, UserRepositoryInterface $user)
+    public function __construct(
+        EventRepositoryInterface $event,
+        UserRepositoryInterface $user,
+        RestaurantRepositoryInterface $restaurant
+    )
     {
         $this->event = $event;
         $this->user = $user;
+        $this->restaurant = $restaurant;
     }
 
     /**
@@ -44,7 +57,9 @@ class EventController extends Controller
      */
     public function index(): Renderable
     {
-        return view('events.index', ['events'=>$this->event->getEvents()]);
+        return view('events.index', [
+            'events' => $this->event->getEvents(4)
+        ]);
     }
 
     /**
@@ -55,10 +70,11 @@ class EventController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        if ($this->event->deleteEvent($id) === true)
+        if ($this->event->deleteEvent($id) === true) {
             return redirect()
                 ->route('events.index')
                 ->with('success', 'Event has been deleted');
+        }
         return redirect()
             ->route('events.index')
             ->with('warning', 'This event cannot be deleted');
@@ -85,9 +101,13 @@ class EventController extends Controller
     {
         $request->validate([
             'date' => 'required',
+            'time' => 'required',
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'address' => 'required'
         ]);
+
+        $this->event->create($request);
 
         return redirect()->route('events.index');
     }
@@ -122,5 +142,37 @@ class EventController extends Controller
         $event->update($request->all());
 
         return redirect()->route('events.index');
+    }
+
+    /**
+     * returns event description view
+     * View: events/description.blade.php
+     *
+     * @param int $id
+     * @return Renderable
+     */
+    public function moreInfo(int $id): Renderable
+    {
+        return view('events.description', [
+            'event' => $this->event->find($id),
+            'restaurants' => $this->restaurant->all()
+        ]);
+    }
+
+    /**
+     * @param int $event_id
+     * @return RedirectResponse
+     */
+    public function join(int $event_id): RedirectResponse
+    {
+
+        if ($this->event->joinEvent($event_id)) {
+            return redirect()->route('events.description', [
+                'event' => $this->event->find($event_id)
+            ])->with('success', 'you have left :(');
+        }
+        return redirect()->route('events.description', [
+            'event' => $this->event->find($event_id)
+        ])->with('success', 'you have successfully joined \(*.*)/');
     }
 }

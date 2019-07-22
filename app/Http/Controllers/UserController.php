@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Contract\UserRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
+use Auth;
 
 /**
  * Class UserController
@@ -83,13 +84,13 @@ class UserController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        if ($this->user->remove($id) === true)
+        if ($this->user->remove($id) === true) {
             return redirect()
                 ->route('users.index')
                 ->with('success', 'User has been deleted');
+        }
         return redirect()
             ->route('users.index')
             ->with('warning', 'This User cannot be deleted');
     }
-
 }

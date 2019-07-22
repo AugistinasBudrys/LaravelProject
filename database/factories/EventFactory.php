@@ -21,7 +21,9 @@ use Faker\Generator as Faker;
 $factory->define(Event::class, function (Faker $faker) {
     return [
         'date' => $faker->date(),
+        'time' => $faker->time(),
         'name' => $faker->word,
-        'description' => $faker->text
+        'description' => $faker->text,
+        'address' => $faker->address
     ];
 });

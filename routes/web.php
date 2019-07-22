@@ -13,22 +13,30 @@
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', 'EventController@index')->name('events.index');
+
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
+
+    Route::get('/events/{event}/description', 'EventController@moreInfo')->name('events.description');
+    route::put('/events/{event}/description', 'EventController@join')->name('events.join');
 
     Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
         Route::put('/users/{user}', 'UserController@update')->name('users.update');
         Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
         Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+
         Route::post('/events', 'EventController@store')->name('events.store');
         Route::get('/events/create', 'EventController@create')->name('events.create');
         Route::put('/events/{event}', 'EventController@update')->name('events.update');
         Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
         Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
+        Route::put('/events/{event}/description/add', 'RestaurantController@add')->name('restaurant.add');
+
         Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
         Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
         Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');

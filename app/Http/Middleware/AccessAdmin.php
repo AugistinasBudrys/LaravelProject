@@ -9,7 +9,7 @@ use Auth;
  * Class AcessAdmin
  * @package App\Http\Middleware
  */
-class AcessAdmin
+class AccessAdmin
 {
     /**
      * used to check if user has the admin role
@@ -20,17 +20,11 @@ class AcessAdmin
      */
     public function handle($request, Closure $next)
     {
-        $isAdmin = false;
-        if (Auth::user()->hasAnyRole('admin')) {
-            $isAdmin = true;
-        }
-
-        if (!$isAdmin) {
+        if (!Auth::user()->hasAnyRole('admin')) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            } else {
-                return redirect()->back();
             }
+            return redirect()->back();
         }
 
         return $next($request);

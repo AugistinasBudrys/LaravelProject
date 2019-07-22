@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         $adminRole = Role::where('name', 'admin')->first();
+        $userRole = Role::where('name', 'user')->first();
 
         //TODO: redo
         $admin = User::create([
@@ -32,6 +33,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin')
         ]);
         $admin->roles()->attach($adminRole);
+        $admin->roles()->attach($userRole);
+
         $this->count = (int)$this->command->ask('How many Users do you need?', $this->count);
         $this->command->info("Creating {$this->count} Users.");
         factory(User::class, $this->count)->create();
