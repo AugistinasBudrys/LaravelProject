@@ -4,9 +4,9 @@
 
 
     <div class="modal-dialog text-center login-form">
-        <div class="col-sm-9 main-section" id="login-center">
-            <div class="modal-content" id="modal-content-login">
-                <h2 id="login">Login</h2>
+        <div class="col-sm-9 main-section login-center">
+            <div class="modal-content modal-content-login">
+                <h2 class="title">Login</h2>
                 <form method="POST" action="{{ route('login') }}" class="col-12">
                     @csrf
 
@@ -34,7 +34,7 @@
                         @enderror
                     </div>
 
-                    <div class="d-flex justify-content-around">
+                    <div class="d-md-flex justify-content-around">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input"
                                    id="exampleCheck1" {{ old('remember') ? 'checked' : '' }}>
@@ -42,12 +42,12 @@
                         </div>
 
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}" id="padding">
+                            <a class="btn btn-link button-padding" href="{{ route('password.request') }}" >
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif
                     </div>
-                    <button id="button-properties-login" type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary button-properties-login">Login</button>
                 </form>
             </div>
         </div>

@@ -128,4 +128,14 @@ class EventController extends Controller
     {
         return view('events.description');
     }
+    
+    public function add()
+    {
+        return view('events.addevent');
+    }
+    
+    public function r_create()
+    {
+        return view('events.create');
+    }
 }

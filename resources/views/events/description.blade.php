@@ -9,7 +9,7 @@
 
                 <!-- Pavadinimas ir Join mygtukas -->
                 <div class="d-md-flex justify-content-between">
-                    <h2 class="m-2">Restorano pavadinimas</h2>
+                    <h2 class="mt-2">Restorano pavadinimas</h2>
                     <button type="button" class="btn btn-primary btn-sm my-2">Join</button>
                 </div>
 
@@ -72,7 +72,7 @@
             <div class="col-lg-3">
 
                 <!-- Administratoriaus veikla -->
-                <div class="card m-2">
+                <div class="card mt-2">
                     <h5 class="card-header">Administratorius</h5>
                     <div class="card-body">
                         <h6 class="card-title">Administratoriaus veiksmai</h6>

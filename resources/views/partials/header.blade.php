@@ -1,22 +1,21 @@
 
 
+<nav class="navbar navbar-expand-sm navbar-light bg-light nav-border">
+    <div class="container">
 
+        <a class="navbar-brand" href="{{ url('/') }}">VGTU DEMO</a>
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light" id="nav-border">
-        <div class="container">
-
-            <a  id="anav" class="navbar-brand" href="{{ url('/') }}">VGTU DEMO</a>
-
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 @hasrole('admin')
                 <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}">Manage Users</a>
+                    <a class="text-body mr-2" href="{{route('events.index')}}">Events</a>
+                    <a class="text-body" href="{{route('users.index')}}">Manage Users</a>
                 </li>
                 @endhasrole
             </ul>
@@ -24,16 +23,16 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a id="log" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link text-body" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a id="reg" class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-body" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-body" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
@@ -53,6 +52,7 @@
                 @endguest
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 

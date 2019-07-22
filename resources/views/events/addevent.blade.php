@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container ">
+    <div class="container">
 
         <div class="row">
 
@@ -32,13 +32,22 @@
                     </form>
 
 
-                    <!-- EVENT TIME -->
+                    <!-- EVENT TIME
                     <form>
                         <div class="form-group mr-4">
                             <label for="time">Time</label>
                             <input type="time" class="form-control" id="time">
                         </div>
-                    </form>
+                    </form>-->
+                    <div class="form-group">
+                        <div>
+                            <div class="form-group">
+                                <input type="time" name="time" class="form-control" placeholder="time">
+                            </div>
+                        </div>
+                    </div>
+
+
 
 
                     <!-- EVENT LOCATION -->

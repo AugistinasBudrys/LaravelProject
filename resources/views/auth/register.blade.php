@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="modal-dialog text-center">
-        <div class="col-sm-9 main-section" id="register-center">
-            <div class="modal-content" id="modal-content-register">
-                <h2 id="login">Register</h2>
+        <div class="col-sm-9 main-section register-center">
+            <div class="modal-content modal-content-register">
+                <h2 class="title">Register</h2>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
@@ -47,7 +47,7 @@
                                name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <button id="button-properties-register" type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary button-properties-register">Register</button>
                 </form>
             </div>
         </div>
