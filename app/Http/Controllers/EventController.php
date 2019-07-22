@@ -27,6 +27,9 @@ class EventController extends Controller
      */
     public $user;
 
+    /**
+     * @var RestaurantRepositoryInterface
+     */
     public $restaurant;
 
     /**
@@ -35,7 +38,11 @@ class EventController extends Controller
      * @param UserRepositoryInterface $user
      * @param RestaurantRepositoryInterface $restaurant
      */
-    public function __construct(EventRepositoryInterface $event, UserRepositoryInterface $user, RestaurantRepositoryInterface $restaurant)
+    public function __construct(
+        EventRepositoryInterface $event,
+        UserRepositoryInterface $user,
+        RestaurantRepositoryInterface $restaurant
+    )
     {
         $this->event = $event;
         $this->user = $user;
@@ -50,7 +57,9 @@ class EventController extends Controller
      */
     public function index(): Renderable
     {
-        return view('events.index', ['events' => $this->event->getEvents(4)]);
+        return view('events.index', [
+            'events' => $this->event->getEvents(4)
+        ]);
     }
 
     /**
@@ -144,7 +153,10 @@ class EventController extends Controller
      */
     public function moreInfo(int $id): Renderable
     {
-        return view('events.description', ['event' => $this->event->find($id), 'restaurants' => $this->restaurant->all()]);
+        return view('events.description', [
+            'event' => $this->event->find($id),
+            'restaurants' => $this->restaurant->all()
+        ]);
     }
 
     /**
@@ -155,10 +167,12 @@ class EventController extends Controller
     {
 
         if ($this->event->joinEvent($event_id)) {
-            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
-                ->with('success', 'you have left :(');
+            return redirect()->route('events.description', [
+                'event' => $this->event->find($event_id)
+            ])->with('success', 'you have left :(');
         }
-            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
-                ->with('success', 'you have successfully joined \(*.*)/');
+        return redirect()->route('events.description', [
+            'event' => $this->event->find($event_id)
+        ])->with('success', 'you have successfully joined \(*.*)/');
     }
 }
