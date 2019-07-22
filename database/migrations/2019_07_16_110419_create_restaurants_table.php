@@ -21,8 +21,10 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->Text('description');
-            $table->string('work_time');
+            $table->string('work_time_from');
+            $table->string('work_time_to');
             $table->string('phone_number');
+            $table->text('URL');
             $table->timestamps();
 
         });

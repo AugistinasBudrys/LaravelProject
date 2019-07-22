@@ -6,6 +6,7 @@ use App\Contract\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 /**
  * Class UserRepository
@@ -93,5 +94,15 @@ class UserRepository implements UserRepositoryInterface
             'email' => $user_data['email'],
             'password' => Hash::make($user_data['password'])
         ]);
+    }
+
+    /**
+     * used to retrieve current user
+     *
+     * @return User
+     */
+    public function current(): User
+    {
+        return Auth::user();
     }
 }

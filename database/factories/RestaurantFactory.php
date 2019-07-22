@@ -23,7 +23,9 @@ $factory->define(Restaurant::class, function (Faker $faker) {
         'name' => $faker->word,
         'address' => $faker->address,
         'description' => $faker->text,
-        'work_time' => $faker->time(),
-        'phone_number' => $faker->phoneNumber
+        'work_time_from' => $faker->time(),
+        'work_time_to' => $faker->time(),
+        'phone_number' => $faker->phoneNumber,
+        'URL' => $faker->url
     ];
 });

@@ -13,11 +13,14 @@
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', 'EventController@index')->name('events.index');
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
+    Route::get('/events/{event}/description', 'EventController@moreInfo')->name('events.description');
+    route::put('/events/{event}/description', 'EventController@join')->name('events.join');
 
     Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
@@ -34,5 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
         Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
         Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
+        Route::put('/events/{event}/description/add', 'RestaurantController@add')->name('restaurant.add');
     });
 });

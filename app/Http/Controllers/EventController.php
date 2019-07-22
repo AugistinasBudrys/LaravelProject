@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contract\RestaurantRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Contract\EventRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
+use Auth;
 
 /**
  * Class EventController
@@ -25,15 +27,19 @@ class EventController extends Controller
      */
     public $user;
 
+    public $restaurant;
+
     /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
      * @param UserRepositoryInterface $user
+     * @param RestaurantRepositoryInterface $restaurant
      */
-    public function __construct(EventRepositoryInterface $event, UserRepositoryInterface $user)
+    public function __construct(EventRepositoryInterface $event, UserRepositoryInterface $user, RestaurantRepositoryInterface $restaurant)
     {
         $this->event = $event;
         $this->user = $user;
+        $this->restaurant = $restaurant;
     }
 
     /**
@@ -58,7 +64,8 @@ class EventController extends Controller
         if ($this->event->deleteEvent($id) === true) {
             return redirect()
                 ->route('events.index')
-                ->with('success', 'Event has been deleted');}
+                ->with('success', 'Event has been deleted');
+        }
         return redirect()
             ->route('events.index')
             ->with('warning', 'This event cannot be deleted');
@@ -85,8 +92,10 @@ class EventController extends Controller
     {
         $request->validate([
             'date' => 'required',
+            'time' => 'required',
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'address' => 'required'
         ]);
 
         $this->event->create($request);
@@ -127,10 +136,33 @@ class EventController extends Controller
     }
 
     /**
+     * returns event description view
+     * View: events/description.blade.php
+     *
+     * @param int $id
      * @return Renderable
      */
-    public function moreInfo(): Renderable
+    public function moreInfo(int $id): Renderable
     {
-        return view('events.moreInfo');
+        return view('events.description', ['event' => $this->event->find($id), 'restaurants' => $this->restaurant->all()]);
+    }
+
+    /**
+     * @param int $event_id
+     * @return RedirectResponse
+     */
+    public function join(int $event_id): RedirectResponse
+    {
+        $event = $this->event->find($event_id);
+        $user = $this->user->current();
+        if ($event->eventUsers->contains($user) === true) {
+            $event->eventUsers()->detach($user);
+            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
+                ->with('success', "you have left :(");
+        } else {
+            $event->eventUsers()->attach($user);
+            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
+                ->with('success', "you have successfully joined \(*.*)/");
+        }
     }
 }
