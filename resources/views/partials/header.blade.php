@@ -15,6 +15,8 @@
                 @hasrole('admin')
                 <li class="nav-item">
                     <a class="text-body mr-2" href="{{route('events.index')}}">Events</a>
+                </li>
+                <li class="nav-item">
                     <a class="text-body" href="{{route('users.index')}}">Manage Users</a>
                 </li>
                 @endhasrole

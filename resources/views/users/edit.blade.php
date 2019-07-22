@@ -9,7 +9,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{route('admin.users.update',['user'=>$user->id])}}" method="POST">
+                        <form action="{{route('users.update',['user'=>$user->id])}}" method="POST">
                             @csrf
                             {{method_field('PUT')}}
                             @foreach($roles as $role)

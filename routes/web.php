@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', 'EventController@index')->name('events.index');
 
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
-    Route::get('/events/moreinfo', 'EventController@moreInfo')->name('events.description');
+    Route::get('/events/description', 'EventController@moreInfo')->name('events.description');
     Route::get('/events/add', 'EventController@add')->name('events.addevent');
     
     

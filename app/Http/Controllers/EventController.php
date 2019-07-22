@@ -151,12 +151,9 @@ class EventController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function moreInfo(int $id): Renderable
+    public function moreInfo(): Renderable
     {
-        return view('events.description', [
-            'event' => $this->event->find($id),
-            'restaurants' => $this->restaurant->all()
-        ]);
+        return view('events.description');
     }
 
     /**
@@ -174,11 +171,6 @@ class EventController extends Controller
         return redirect()->route('events.description', [
             'event' => $this->event->find($event_id)
         ])->with('success', 'you have successfully joined \(*.*)/');
-    }
-    
-    public function moreInfo()
-    {
-        return view('events.description');
     }
     
     public function add()

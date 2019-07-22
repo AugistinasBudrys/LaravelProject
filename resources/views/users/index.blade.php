@@ -25,10 +25,10 @@
                                         <th>{{ $user->email }}</th>
                                         <th>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray()) }}</th>
                                         <th>
-                                            <a href="{{route('admin.users.edit', $user->id)}}" class="float-left">
+                                            <a href="{{route('users.edit', $user->id)}}" class="float-left">
                                                 <button type="button" class="btn btn-primary">Edit</button>
                                             </a>
-                                            <form action="{{route('admin.users.destroy',$user->id)}}" method="POST"
+                                            <form action="{{route('users.destroy',$user->id)}}" method="POST"
                                                   class="float-left">
                                                 {{method_field('DELETE')}}
                                                 @csrf

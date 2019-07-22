@@ -32,20 +32,24 @@
                     </form>
 
 
-                    <!-- EVENT TIME
+                     <!--EVENT TIME -->
                     <form>
                         <div class="form-group mr-4">
                             <label for="time">Time</label>
                             <input type="time" class="form-control" id="time">
                         </div>
-                    </form>-->
-                    <div class="form-group">
+                    </form>
+                   <!-- <div class="form-group">
                         <div>
                             <div class="form-group">
-                                <input type="time" name="time" class="form-control" placeholder="time">
+                                <input type="time" name="time" class="form-control-md" placeholder="time">
                             </div>
                         </div>
-                    </div>
+
+                    </div>-->
+
+
+
 
 
 

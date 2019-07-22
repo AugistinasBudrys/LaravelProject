@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @if($events->first() !== null)
     <div class="container">
         <div class="row align-items-center my-2 col-md-12">
             <h1 class="font-weight-bold btn-lg">{{$events->first()->date}}</h1>
@@ -21,7 +22,7 @@
                 <div class="row col-md-12">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item">
-                            <a href="" class="float-left">
+                            <a href="{{route('events.description')}}" class="float-left">
                                 <button type="button" class="btn btn-primary">More info</button>
                             </a>
                         </li>
@@ -46,7 +47,7 @@
                                     <p class="card-text">{{$event->description}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="" class="btn btn-primary btn-sm">More Info</a>
+                                    <a href="{{route('events.description')}}" class="btn btn-primary btn-sm">More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -55,4 +56,6 @@
             </div>
         </div>
     </div>
+    @else <p class="text-black-50 m-0">No events</p>
+    @endif
 @endsection
