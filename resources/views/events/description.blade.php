@@ -31,13 +31,13 @@
                 <div class='card w-50 my-2'>
 
                     <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 1</h5>
+                        <h5 class='card-title'>Additional information 1</h5>
                         <p class='card-text'>{{$event->time}}</p>
                     </div>
                 </div>
                 <div class='card w-50 my-2'>
                     <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 2</h5>
+                        <h5 class='card-title'>Additional information 2</h5>
                         <p class='card-text'>{{$event->address}}</p>
                     </div>
                 </div>
@@ -45,9 +45,9 @@
             @hasrole('admin')
             <div class='col-md-3'>
                 <div class='card m-2'>
-                    <h5 class='card-header'>Administratorius</h5>
+                    <h5 class='card-header'>Admin</h5>
                     <div class='card-body'>
-                        <h6 class='card-title'>Administratoriaus veiksmai</h6>
+                        <h6 class='card-title'>Admin actions</h6>
                         <a href='{{route('restaurants.create')}}' class='btn btn-primary my-2'>Add restaurant</a>
                         <a href='#' class='btn btn-primary my-2'>Delete event</a>
                         <a href='#' class='btn btn-primary my-2'>Edit event</a>

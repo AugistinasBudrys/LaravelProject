@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class='container'>
     @hasrole('admin')
     <div class='row align-items-right col-md-12 text-right'>
         <a href='{{route('events.create')}}' class='float-right'>
@@ -9,6 +10,7 @@
     </div>
     @endhasrole
     @if($events->first() !== null)
+
         <div class='row align-items-center my-6'>
             <div class='col-md-12'>
                 <h1 class='font-weight-light'>{{$events->first()->name}}
@@ -49,7 +51,7 @@
                                 </div>
                                 <div class='card-footer'>
                                     <a href='{{route('events.description',['event' => $event->id])}}'
-                                       class="btn btn-primary btn-sm">More Info</a>
+                                       class='btn btn-primary btn-sm'>More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +59,9 @@
                 @endforeach
             </div>
         </div>
+
     @else
         <p class='text-black-50 m-0'>No events could be found</p>
     @endif
+        </div>
 @endsection
