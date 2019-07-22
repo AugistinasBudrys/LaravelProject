@@ -153,16 +153,12 @@ class EventController extends Controller
      */
     public function join(int $event_id): RedirectResponse
     {
-        $event = $this->event->find($event_id);
-        $user = $this->user->current();
-        if ($event->eventUsers->contains($user) === true) {
-            $event->eventUsers()->detach($user);
+
+        if ($this->event->joinEvent($event_id)) {
             return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
-                ->with('success', "you have left :(");
-        } else {
-            $event->eventUsers()->attach($user);
-            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
-                ->with('success', "you have successfully joined \(*.*)/");
+                ->with('success', 'you have left :(');
         }
+            return redirect()->route('events.description', ['event' => $this->event->find($event_id)])
+                ->with('success', 'you have successfully joined \(*.*)/');
     }
 }

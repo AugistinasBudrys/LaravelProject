@@ -42,4 +42,6 @@ interface EventRepositoryInterface
      * @return Collection
      */
     public function getEvents(int $num): Collection;
+
+    public function joinEvent(int $event_id);
 }
