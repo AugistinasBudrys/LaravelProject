@@ -85,7 +85,7 @@ class Restaurant extends Model
      */
     public function setNameAttribute(string $name): void
     {
-        $this->attributes['name'] = str_replace("/string/", "", $name);
+        $this->attributes['name'] = str_replace('/string/', '', $name);
     }
 
     /**
@@ -94,7 +94,7 @@ class Restaurant extends Model
      */
     public function setAddressAttribute(string $address): void
     {
-        $this->attributes['address'] = str_replace("/string/", "", $address);
+        $this->attributes['address'] = str_replace('/string/', '', $address);
     }
 
     /**
@@ -103,7 +103,7 @@ class Restaurant extends Model
      */
     public function setDescriptionAttribute(string $description): void
     {
-        $this->attributes['description'] = str_replace("/string/", "", $description);
+        $this->attributes['description'] = str_replace('/string/', '', $description);
     }
 
     /**
@@ -112,7 +112,7 @@ class Restaurant extends Model
      */
     public function setWorkTimeFromAttribute(string $work_time_from): void
     {
-        $this->attributes['work_time_from'] = str_replace("/time/", "", $work_time_from);
+        $this->attributes['work_time_from'] = str_replace('/time/', '', $work_time_from);
     }
 
     /**
@@ -121,7 +121,7 @@ class Restaurant extends Model
      */
     public function setWorkTimeToAttribute(string $work_time_to): void
     {
-        $this->attributes['work_time_to'] = str_replace("/time/", "", $work_time_to);
+        $this->attributes['work_time_to'] = str_replace('/time/', '', $work_time_to);
     }
 
     /**
@@ -130,7 +130,7 @@ class Restaurant extends Model
      */
     public function setPhoneNumberAttribute(string $phone_number): void
     {
-        $this->attributes['phone_number'] = str_replace("/string/", "", $phone_number);
+        $this->attributes['phone_number'] = str_replace('/string/', '', $phone_number);
     }
 
     /**
@@ -139,7 +139,7 @@ class Restaurant extends Model
      */
     public function setUrlAttribute(string $url): void
     {
-        $this->attributes['URL'] = str_replace("/string/", "", $url);
+        $this->attributes['URL'] = str_replace('/string/', '', $url);
     }
 
     /**
