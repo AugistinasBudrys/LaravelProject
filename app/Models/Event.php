@@ -152,8 +152,7 @@ class Event extends Model
     {
         $event = $this->find($event_id);
         $user = Auth::user();
-        if($event->eventUsers->contains($user) === true){ return true;}
-        return false;
+        return $event->eventUsers->contains($user);
     }
 
     /**
