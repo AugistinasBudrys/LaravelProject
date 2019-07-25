@@ -30,3 +30,51 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+// cia atseit krepimasis kad grazintu kita blade ir as niekaip nesuprantu kodel neveikia
+$(document).ready(function(){
+    PopUpHide();
+});
+
+function PopUpHide(){
+    $("#popup1").hide();
+}
+$(document).ready(function() {
+    $('#yes').click(function() {
+        $.ajax({
+            url: 'restaurant.add',
+            type: 'GET',
+            data: '',
+            success: function PopUpShow(){
+                $(".b-container").show();
+            }
+        })
+        });
+    });
+
+// modaline forma description.blade siaip zinute
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+};
+
+span.onclick = function() {
+    modal.style.display = "none";
+};
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+};

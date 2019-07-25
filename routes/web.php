@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -35,7 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/events/{event}', 'EventController@update')->name('events.update');
         Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
         Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
-        Route::put('/events/{event}/description/add', 'RestaurantController@add')->name('restaurant.add');
+        // routas i kuri bandau kreiptis per ajax
+        Route::post('/events/{event}/description/add', 'RestaurantController@add')->name('events.add');
 
         Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
         Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
@@ -44,3 +45,4 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
     });
 });
+
