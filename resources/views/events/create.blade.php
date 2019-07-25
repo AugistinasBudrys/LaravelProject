@@ -1,87 +1,92 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container ">
+    <div class="container">
+        <h2 class="my-3">Create Restaurant</h2>
 
-        <div class="row">
-
-            <div class="col-md-12">
-
-                <h2 class="mt-4">Create Restaurant</h2>
-
-                <hr>
-
-                <!-- Restaurant NAME -->
-                <div class="col-md-4 pl-0">
-                    <form>
-                        <div class="form-group">
-                            <label for="res-name">Restaurant Name</label>
-                            <input type="text" class="form-control" id="res-name" placeholder="Enter Restaurant Name">
-                        </div>
-                    </form>
+            <div>
+            <!--@if ($message = Session::get('success'))
+                <div> class="alert alert-success alert-block"-->
+                    <!--<button type="button" class="close" data-dismiss="alert">×</button>-->
+                <!--<strong>{{ $message }}</strong>
                 </div>
 
+            @endif-->
 
-                <!-- START D-FLEX -->
-                <!-- DARBO LAIKAS NUO -->
-                <div class="d-md-flex flex-row">
-                    <form>
-                        <div class="form-group mr-2">
-                            <label for="fromt">From</label>
-                            <input type="time" class="form-control" id="fromt">
-                        </div>
-                    </form>
+            @if (count($errors) > 0)
 
-
-                    <!-- IKI -->
-                    <form>
-                        <div class="form-group mr-4">
-                            <label for="tot">To</label>
-                            <input type="time" class="form-control" id="tot">
-                        </div>
-                    </form>
-
-                    <!-- Restaurant LOCATION -->
-                    <form>
-                        <div class="form-group mr-4">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter Location">
-                        </div>
-                    </form>
-
-
-                    <!-- Restaurant telefonas -->
-                    <form>
-                        <div class="form-group mr-4">
-                            <label for="tel">Telephone</label>
-                            <input class="form-control" type="tel" id="tel" placeholder="Enter Telephone">
-                        </div>
-                    </form>
-
-                    <!-- Restaurant URL -->
-                    <form>
-                        <div class="form-group mr-4">
-                            <label for="url">URL</label>
-                            <input class="form-control" type="url" id="url" placeholder="Enter URL">
-                        </div>
-                    </form>
-
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <!-- END D-FLEX -->
+            @endif
+            </div>
 
-                <!-- Restaurant DESCRIPTION -->
+
+            <form action="{{route('image.upload.post')}}" method="post" enctype="multipart/form-data">
+            @csrf
+
+            <!-- NAME -->
                 <div class="form-group">
-                    <label for="description">Restaurant Description</label>
-                    <textarea class="form-control" id="description" rows="3"></textarea>
+                    <label for="res-name">Restaurant Name</label>
+                    <input class="form-control" type="text" name="res-name" id="res-name"
+                           placeholder="Enter Restaurant Name">
                 </div>
 
-                <!-- Restaurant BUTTONS -->
+                <!-- DARBO LAIKAS NUO -->
+                <div class="form-group">
+                    <label for="time-from">From</label>
+                    <input class="form-control" type="time" name="time-from" id="time-from">
+                </div>
+
+                <!-- DARBO LAIKAS IKI -->
+                <div class="form-group">
+                    <label for="time-to">To</label>
+                    <input class="form-control" type="time" name="time-to" id="time-to">
+                </div>
+
+                <!-- LOCATION -->
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input class="form-control" type="text" name="location" id="location" placeholder="Enter Location">
+                </div>
+
+                <!-- TELEFONAS -->
+                <div class="form-group">
+                    <label for="tel">Telephone</label>
+                    <input class="form-control" type="tel" name="tel" id="tel" placeholder="Enter Telephone">
+                </div>
+
+                <!-- URL -->
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input class="form-control" type="url" name="url" id="url" placeholder="Enter URL">
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label for="desc">Restaurant Description</label>
+                    <textarea class="form-control" id="desc" rows="3"></textarea>
+                </div>
+
+                <!-- IMAGE UPLOAD-->
+                <div class="form-group d-flex flex-column">
+                    <label for="image">Upload Image</label>
+                    <input type="file" name="image">
+                </div>
+
+                <!-- BUTTON -->
                 <div class="d-flex justify-content-around">
-                    <button type="button" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                     <button type="button" class="btn btn-primary">Back</button>
                 </div>
-            </div>
-        </div>
+
+
+            </form>
     </div>
 
 

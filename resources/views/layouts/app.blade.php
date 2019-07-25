@@ -24,8 +24,8 @@
 <body>
 <div id="app" class="fbody">
 
-    @include('partials.alerts')
     @include('partials.header')
+    @include('partials.alerts')
 
     @yield('content')
 </div>

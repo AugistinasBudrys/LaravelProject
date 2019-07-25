@@ -45,5 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
         Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
         Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
+    
+    
+        Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+        Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
     });
 });

@@ -25,6 +25,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('work_time_to');
             $table->string('phone_number');
             $table->text('URL');
+            $table->string('image')->nullable();
             $table->timestamps();
 
         });
