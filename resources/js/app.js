@@ -37,44 +37,88 @@ $.ajaxSetup({
     }
 });
 
-// cia atseit krepimasis kad grazintu kita blade ir as niekaip nesuprantu kodel neveikia
-$(document).ready(function(){
-    PopUpHide();
-});
+// $(document).ready(function(){
+//     PopUpHide();
+// });
 
-function PopUpHide(){
-    $("#popup1").hide();
-}
+// function PopUpHide(){
+//     $("#edit-item").hide();
+// }
+// $(document).ready(function() {
+//     $('#yes').click(function() {
+//         $.ajax({
+//             url: 'events.add',
+//             type: 'POST',
+//             // data:,
+//             dataType: 'json',
+//             success: function PopUpShow(json){
+//                 $("#edit-item").show();
+//             },
+//             error: function(jqXHR, textStatus, errorThrown) {
+//                 alert('An error occurred... Look at the console (F12 or Ctrl+Shift+I, Console tab) for more information!');
+//
+//                 $('#result').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
+//                 console.log('jqXHR:');
+//                 console.log(jqXHR);
+//                 console.log('textStatus:');
+//                 console.log(textStatus);
+//                 console.log('errorThrown:');
+//                 console.log(errorThrown);
+//         }
+//         })
+//         });
+//     });
+
+
 $(document).ready(function() {
-    $('#yes').click(function() {
+    $('.join').click(function(e) {
+        console.log(e.target.id);
+        e.preventDefault();
+        var eventId = $('#extra').val();
+        console.log(eventId);
         $.ajax({
-            url: 'restaurant.add',
-            type: 'GET',
-            data: '',
-            success: function PopUpShow(){
-                $(".b-container").show();
+            type: 'POST',
+            url: '/events/join',
+            data: {
+                "data": eventId
+            },
+            dataType: 'json',
+            success: function (data){
+                $('#joined-users').load(document.URL +  ' #smth');
+            },
+            error: function(e) {
+                console.log(e);
             }
         })
-        });
     });
+});
 
-// modaline forma description.blade siaip zinute
-var modal = document.getElementById("myModal");
-
-var btn = document.getElementById("myBtn");
-
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-    modal.style.display = "block";
-};
-
-span.onclick = function() {
-    modal.style.display = "none";
-};
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+$('.join').on("click", function() {
+    var el = $(this);
+    if (el.text() === el.data("text-swap")) {
+        el.text(el.data("text-original"));
+    } else {
+        el.data("text-original", el.text());
+        el.text(el.data("text-swap"));
     }
-};
+});
+
+// var modal = document.getElementById("myModal");
+//
+// var btn = document.getElementById("myBtn");
+//
+// var span = document.getElementsByClassName("close")[0];
+//
+// btn.onclick = function() {
+//     modal.style.display = "block";
+// };
+//
+// span.onclick = function() {
+//     modal.style.display = "none";
+// };
+//
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// };

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Auth;
@@ -12,6 +14,7 @@ use Auth;
  */
 class Event extends Model
 {
+    use Notifiable;
     /**
      * @var array
      */
@@ -163,5 +166,16 @@ class Event extends Model
     {
         $event = $this->find($event_id);
         return $event->eventUsers->count();
+    }
+
+    public function hasAnyRestaurant(string $restaurant): bool
+    {
+        return null !== $this->restaurants()->where('name', $restaurant)->first();
+    }
+
+    public function joinedUsers(int $event_id)
+    {
+        $event = $this->find($event_id);
+       return implode(', ',$event->eventUsers()->get()->pluck('name')->toArray());
     }
 }
