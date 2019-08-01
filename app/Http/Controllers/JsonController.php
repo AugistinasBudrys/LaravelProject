@@ -6,6 +6,7 @@ use App\Contract\EventRepositoryInterface;
 use App\Contract\RestaurantRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class JsonController extends Controller
@@ -54,6 +55,18 @@ class JsonController extends Controller
             return response()->json($event);
         }
         $event = $this->event->find($request->data)->toArray();
+        return response()->json($event);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addRestaurant(Request $request): JsonResponse
+    {
+        $event = $this->event->find($request->event_id);
+        $event->restaurants()->sync($request->restaurant_id);
+
         return response()->json($event);
     }
 }

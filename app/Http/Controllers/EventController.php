@@ -158,21 +158,4 @@ class EventController extends Controller
             'restaurants' => $this->restaurant->all()
         ]);
     }
-
-    /**
-     * @param int $event_id
-     * @return RedirectResponse
-     */
-    public function join(int $event_id): RedirectResponse
-    {
-
-        if ($this->event->joinEvent($event_id)) {
-            return redirect()->route('events.description', [
-                'event' => $this->event->find($event_id)
-            ])->with('success', 'you have left :(');
-        }
-        return redirect()->route('events.description', [
-            'event' => $this->event->find($event_id)
-        ])->with('success', 'you have successfully joined \(*.*)/');
-    }
 }

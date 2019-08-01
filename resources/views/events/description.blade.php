@@ -36,6 +36,20 @@
                            id='joined-users'>{{$event->joinedUsers($event->id)}}</p>
                     </div>
                 </div>
+                <hr>
+                <div class='card w-100 my-2'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>Restaurants for this event</h5>
+                        <div id='added-events'>
+                        @foreach($event->eventRestaurants($event->id) as $names)
+                        <div class='d-md-flex justify-content-between'>
+                                <p class='card-text'>{{$names}}</p>
+                            <button class='btn-primary btn-sm mb-2'>vote</button>
+                            </div>
+                        @endforeach
+                       </div>
+                    </div>
+                </div>
             </div>
             @hasrole('admin')
             <div class='col-md-3'>
@@ -43,7 +57,8 @@
                     <h5 class='card-header'>Admin</h5>
                     <div class='card-body'>
                         <h6 class='card-title'>Admin actions</h6>
-                        <button class='btn btn-primary my-2' id="myBtn">Add restaurant</button>
+                        <button class='btn btn-primary my-2 addRest' name='add' value='add' id='{{$event->id}}'>Add restaurant</button>
+
                         <button id='yes' class='btn btn-primary my-2'>Delete event</button>
                         <a href='#' class='btn btn-primary my-2'>Edit event</a>
                     </div>
@@ -53,4 +68,5 @@
         </div>
         </div>
     </div>
+    @include('events/add',['event'=>$event, 'restaurants'=>$restaurants])
 @endsection

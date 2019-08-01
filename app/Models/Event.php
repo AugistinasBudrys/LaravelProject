@@ -168,14 +168,32 @@ class Event extends Model
         return $event->eventUsers->count();
     }
 
+    /**
+     * @param string $restaurant
+     * @return bool
+     */
     public function hasAnyRestaurant(string $restaurant): bool
     {
         return null !== $this->restaurants()->where('name', $restaurant)->first();
     }
 
-    public function joinedUsers(int $event_id)
+    /**
+     * @param int $event_id
+     * @return string
+     */
+    public function joinedUsers(int $event_id): string
     {
         $event = $this->find($event_id);
        return implode(', ',$event->eventUsers()->get()->pluck('name')->toArray());
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function eventRestaurants(int $id): array
+    {
+        $event = $this->find($id);
+        return $event->restaurants()->get()->pluck('name')->toArray();
     }
 }

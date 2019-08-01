@@ -50,14 +50,6 @@ $(document).ready(function() {
             dataType: 'json',
             success: function (data){
                 $('#joined-users').load(document.URL +  ' #joined-users');
-
-                var el = $(this);
-                if (el.text() === el.data("text-swap")) {
-                    el.text(el.data("text-original"));
-                } else {
-                    el.data("text-original", el.text());
-                    el.text(el.data("text-swap"));
-                }
             },
             error: function(e) {
                 console.log(e);
@@ -66,12 +58,42 @@ $(document).ready(function() {
     });
 });
 
-$('.join').on("click", function() {
+$('.join').on('click', function() {
     var el = $(this);
-    if (el.text() === el.data("text-swap")) {
-        el.text(el.data("text-original"));
+    if (el.text() === el.data('text-swap')) {
+        el.text(el.data('text-original'));
     } else {
-        el.data("text-original", el.text());
-        el.text(el.data("text-swap"));
+        el.data('text-original', el.text());
+        el.text(el.data('text-swap'));
     }
 });
+
+$(document).on('click', '.addRest',function(e){
+        e.preventDefault();
+        $('#edit-item').modal('show');
+});
+
+$('.Add').click(function(e){
+    e.preventDefault();
+    var event_id = $('#eventId').val();
+    var restaurant_id = [];
+    $('#restaurantId:checked').each(function(){
+        restaurant_id.push($(this).val());
+    });
+    console.log(event_id);
+    console.log(restaurant_id);
+    $.ajax({
+        type: 'POST',
+        url: '/events/assign/restaurant',
+        data: {event_id: event_id, restaurant_id: restaurant_id},
+        dataType: 'json',
+        success: function(data){
+            $('#edit-item').modal('hide');
+            $('#added-events').load(document.URL +  ' #added-events');
+        },
+        error: function(e){
+            console.log(e);
+        }
+    })
+});
+
