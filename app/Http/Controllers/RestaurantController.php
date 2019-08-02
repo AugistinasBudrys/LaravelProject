@@ -44,7 +44,7 @@ class RestaurantController extends Controller
      */
     public function index(): Renderable
     {
-        return view('restaurants.index')->with('restaurants', $this->restaurant->paginate(10));
+        return view('restaurants.index', ['restaurants'=>$this->restaurant->all()]);
     }
 
     /**
@@ -131,29 +131,5 @@ class RestaurantController extends Controller
         $restaurant->update($request->all());
 
         return redirect()->route('restaurants.index');
-    }
-
-   /* /**
-     * @param int $restaurant_id
-     * @param int $event_id
-     * @return RedirectResponse
-     */
-    /*public function add(int $restaurant_id, int $event_id): RedirectResponse
-    {
-        $restaurant = $this->restaurant->find($restaurant_id);
-        $restaurant->eventRestaurants()->attach($event_id);
-
-        return redirect()->route('events.description', [
-            'event' => $this->event->find($event_id),
-            'restaurants' => $this->restaurant->all()
-        ]);
-    }*/
-
-    // tipo view atiduoda json formatu
-    public function add()
-    {
-        $view = view("events.add")->render();
-
-        return response()->JSON($view);
     }
 }

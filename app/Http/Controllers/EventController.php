@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contract\RestaurantRepositoryInterface;
+use App\Contract\VoteRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Renderable;
@@ -32,21 +33,26 @@ class EventController extends Controller
      */
     public $restaurant;
 
+    public $vote;
+
     /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
      * @param UserRepositoryInterface $user
      * @param RestaurantRepositoryInterface $restaurant
+     * @param VoteRepositoryInterface $vote
      */
     public function __construct(
         EventRepositoryInterface $event,
         UserRepositoryInterface $user,
-        RestaurantRepositoryInterface $restaurant
+        RestaurantRepositoryInterface $restaurant,
+        VoteRepositoryInterface $vote
     )
     {
         $this->event = $event;
         $this->user = $user;
         $this->restaurant = $restaurant;
+        $this->vote = $vote;
     }
 
     /**
@@ -155,7 +161,8 @@ class EventController extends Controller
     {
         return view('events.description', [
             'event' => $this->event->find($id),
-            'restaurants' => $this->restaurant->all()
+            'restaurants' => $this->restaurant->all(),
+            'votes' => $this->vote->find($id)
         ]);
     }
 }

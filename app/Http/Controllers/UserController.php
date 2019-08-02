@@ -73,7 +73,7 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $user->roles()->sync($request->roles);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'user has been updated');
     }
 
     /**

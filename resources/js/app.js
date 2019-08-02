@@ -37,8 +37,8 @@ $.ajaxSetup({
     }
 });
 
-$(document).ready(function() {
-    $('.join').click(function(e) {
+$(document).ready(function () {
+    $('.join').click(function (e) {
         e.preventDefault();
         var eventId = $('#extra').val();
         $.ajax({
@@ -48,17 +48,17 @@ $(document).ready(function() {
                 "data": eventId
             },
             dataType: 'json',
-            success: function (data){
-                $('#joined-users').load(document.URL +  ' #joined-users');
+            success: function (data) {
+                $('#joined-users').load(document.URL + ' #joined-users');
             },
-            error: function(e) {
+            error: function (e) {
                 console.log(e);
             }
         })
     });
 });
 
-$('.join').on('click', function() {
+$('.join').on('click', function () {
     var el = $(this);
     if (el.text() === el.data('text-swap')) {
         el.text(el.data('text-original'));
@@ -68,32 +68,48 @@ $('.join').on('click', function() {
     }
 });
 
-$(document).on('click', '.addRest',function(e){
-        e.preventDefault();
-        $('#edit-item').modal('show');
+$(document).on('click', '.addRest', function (e) {
+    e.preventDefault();
+    $('#edit-item').modal('show');
 });
 
-$('.Add').click(function(e){
+$('.Add').click(function (e) {
     e.preventDefault();
     var event_id = $('#eventId').val();
     var restaurant_id = [];
-    $('#restaurantId:checked').each(function(){
+    $('#restaurantId:checked').each(function () {
         restaurant_id.push($(this).val());
     });
-    console.log(event_id);
-    console.log(restaurant_id);
     $.ajax({
         type: 'POST',
         url: '/events/assign/restaurant',
         data: {event_id: event_id, restaurant_id: restaurant_id},
         dataType: 'json',
-        success: function(data){
+        success: function (data) {
             $('#edit-item').modal('hide');
-            $('#added-events').load(document.URL +  ' #added-events');
+            $('#added-events').load(document.URL + ' #added-events');
         },
-        error: function(e){
+        error: function (e) {
             console.log(e);
         }
     })
 });
 
+$('.vote').click(function (e) {
+    e.preventDefault();
+    var event_id = $('#vote').val();
+    var restaurant_id = e.target.id;
+    console.log(event_id);
+    console.log(restaurant_id);
+    $.ajax({
+        type: 'POST',
+        url: '/events/vote',
+        data: {event_id: event_id, restaurant_id: restaurant_id},
+        dataType: 'json',
+        success: function (data) {
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+});

@@ -59,8 +59,6 @@ class EventRepository implements EventRepositoryInterface
         return Event::find($id);
     }
 
-    //dbr tipo sortina pagal laika ir pagal data bet as nezinau kaip paimti kad ieskotu ir pgal laika ir pagal data nes
-    //jei pridedu ieskojima pagal laika niek neberanda
     /**
      * @param int $num
      * @return Collection

@@ -2,7 +2,7 @@
 @section('content')
     <div class='container'>
         <div class='row'>
-            <div class='col-md-9'>
+            <div class='col-md'>
                 <div class='d-md-flex justify-content-between'>
                     <h2 class='m-2'>{{$event->name}}</h2>
                     <div class='d-md-flex justify-content-end'></div>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class='card w-50 my-2'>
+                <div class='card w-100 my-2'>
 
                     <div class='card-body'>
                         <h5 class='card-title'>People that joined</h5>
@@ -41,10 +41,11 @@
                     <div class='card-body'>
                         <h5 class='card-title'>Restaurants for this event</h5>
                         <div id='added-events'>
+                        <input type='hidden' id='vote' value='{{$event->id}}'>
                         @foreach($event->eventRestaurants($event->id) as $names)
                         <div class='d-md-flex justify-content-between'>
-                                <p class='card-text'>{{$names}}</p>
-                            <button class='btn-primary btn-sm mb-2'>vote</button>
+                                <p class='card-text'>{{$names->name}}</p>
+                            <button id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote'>vote</button>
                             </div>
                         @endforeach
                        </div>

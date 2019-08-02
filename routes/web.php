@@ -22,7 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
 
     Route::get('/events/{event}/description', 'EventController@moreInfo')->name('events.description');
-    route::post('/events/join', 'JsonController@join')->name('events.join');
+    Route::post('/events/join', 'JsonController@join')->name('events.join');
+    Route::post('/events/vote', 'JsonController@vote')->name('events.vote');
 
     Route::group(['middleware' => 'auth.admin'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');

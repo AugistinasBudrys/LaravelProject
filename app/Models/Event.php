@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Auth;
@@ -191,9 +190,9 @@ class Event extends Model
      * @param int $id
      * @return array
      */
-    public function eventRestaurants(int $id): array
+    public function eventRestaurants(int $id)
     {
         $event = $this->find($id);
-        return $event->restaurants()->get()->pluck('name')->toArray();
+        return $event->restaurants()->get()->sortBy('id');
     }
 }

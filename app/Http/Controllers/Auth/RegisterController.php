@@ -8,7 +8,8 @@ use App\Contract\UserRepositoryInterface;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator as Validation;
-
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 /**
  * Class RegisterController
@@ -57,6 +58,18 @@ class RegisterController extends Controller
         $this->role = $role;
         $this->middleware('guest');
     }
+
+    /*/**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    /*public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }*/
 
     /**
      * @param array $data
