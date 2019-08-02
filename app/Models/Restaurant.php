@@ -21,7 +21,9 @@ class Restaurant extends Model
         'work_time_from',
         'work_time_to',
         'phone_number',
-        'URL'
+        'URL',
+        'logo',
+        'images'
     ];
 
     /**

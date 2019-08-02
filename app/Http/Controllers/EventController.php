@@ -21,17 +21,17 @@ class EventController extends Controller
      * @var EventRepositoryInterface
      */
     public $event;
-
+    
     /**
      * @var UserRepositoryInterface
      */
     public $user;
-
+    
     /**
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-
+    
     /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
@@ -48,7 +48,7 @@ class EventController extends Controller
         $this->user = $user;
         $this->restaurant = $restaurant;
     }
-
+    
     /**
      * Returns the view of the event index page
      * View: events/index.blade
@@ -61,7 +61,7 @@ class EventController extends Controller
             'events' => $this->event->getEvents(4)
         ]);
     }
-
+    
     /**
      * Function for removing events
      *
@@ -79,7 +79,7 @@ class EventController extends Controller
             ->route('events.index')
             ->with('warning', 'This event cannot be deleted');
     }
-
+    
     /**
      * Returns the view of the event creation page
      * View: events/create.blade
@@ -90,7 +90,7 @@ class EventController extends Controller
     {
         return view('events.create')->with('events');
     }
-
+    
     /**
      * Stores new event into database
      *
@@ -106,12 +106,12 @@ class EventController extends Controller
             'description' => 'required',
             'address' => 'required'
         ]);
-
+        
         $this->event->create($request);
-
+        
         return redirect()->route('events.index');
     }
-
+    
     /**
      * Returns the view of the event edit
      * View: events/edit.blade
@@ -123,7 +123,7 @@ class EventController extends Controller
     {
         return view('events.edit', compact('event'));
     }
-
+    
     /**
      * Updates the event entries in the database
      *
@@ -138,12 +138,12 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required'
         ]);
-
+        
         $event->update($request->all());
-
+        
         return redirect()->route('events.index');
     }
-
+    
     /**
      * returns event description view
      * View: events/description.blade.php
@@ -151,18 +151,21 @@ class EventController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function moreInfo(): Renderable
+    public function moreInfo(int $id): Renderable
     {
-        return view('events.description');
+        return view('events.description', [
+            'event' => $this->event->find($id),
+            'restaurants' => $this->restaurant->all()
+        ]);
     }
-
+    
     /**
      * @param int $event_id
      * @return RedirectResponse
      */
     public function join(int $event_id): RedirectResponse
     {
-
+        
         if ($this->event->joinEvent($event_id)) {
             return redirect()->route('events.description', [
                 'event' => $this->event->find($event_id)
@@ -171,15 +174,5 @@ class EventController extends Controller
         return redirect()->route('events.description', [
             'event' => $this->event->find($event_id)
         ])->with('success', 'you have successfully joined \(*.*)/');
-    }
-    
-    public function add()
-    {
-        return view('events.addevent');
-    }
-    
-    public function r_create()
-    {
-        return view('events.create');
     }
 }

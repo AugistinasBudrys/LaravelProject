@@ -35,16 +35,14 @@ class RestaurantRepository implements RestaurantRepositoryInterface
         $restaurant = new Restaurant();
         return $restaurant->removeRestaurant($restaurantId);
     }
-
+    
     /**
-     * Request input of a new restaurant
-     *
-     * @param Request $request
+     * @param array $params
      * @return Restaurant
      */
-    public function create(Request $request): Restaurant
+    public function create(array $params): Restaurant
     {
-        return Restaurant::create($request->all());
+        return Restaurant::create($params);
     }
 
     /**

@@ -1,72 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Create Events
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <h2 class='mt-4'>Add Restaurant</h2>
+                <hr>
+                <form action="{{ route('restaurants.store') }}" method='POST' enctype="multipart/form-data">
+                    @csrf
+                    <div class='col-md-4 pl-0'>
+                        <div class='form-group'>
+                            <label for='res-name'>Restaurant ID</label>
+                            <input type='text' id='res-name' name='name' class='form-control' placeholder='name'>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <form action="{{route('restaurants.store')}}" method="POST">
-                            @csrf
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control-md" placeholder="name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="address" class="form-control-md col-12" placeholder="address">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="description"
-                                                  placeholder="description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <p>From: <input type="time" name="work_time_from" class="form-control-md" placeholder="time">
-                                         To: <input type="time" name="work_time_to" class="form-control-md" placeholder="time"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <input type="file" name="menu" class="form-control-md" placeholder="menu">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="phone_number" class="form-control-md" placeholder="number">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <input type="url" name="URL" class="form-control-md col-12" placeholder="URL">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </div>
-                        </form>
+
+                    <div class='d-md-flex flex-row'>
+                        <div class='form-group mr-2'>
+                            <label for='from'>From</label>
+                            <input type='time' name='work_time_from' id='from' class='form-control' placeholder='time'>
+                        </div>
+                        <div class='form-group mr-4'>
+                            <label for='to'>To</label>
+                            <input type='time' class='form-control' id='to' name='work_time_to'>
+                        </div>
+                        <div class='form-group mr-4'>
+                            <label for='location'>Location</label>
+                            <input type='text' class='form-control' id='location' name='address'
+                                   placeholder='Enter Location'>
+                        </div>
+                        <div class='form-group mr-4'>
+                            <label for='tel'>Telephone</label>
+                            <input class='form-control' type='tel' id='tel' name='phone_number'
+                                   placeholder='Enter Telephone'>
+                        </div>
+                        <div class='form-group mr-4'>
+                            <label for='url'>URL</label>
+                            <input class='form-control' type='url' id='url' name='URL' placeholder='Enter URL'>
+                        </div>
                     </div>
-                </div>
+
+                    <div class='form-group'>
+                        <label for='description'>Restaurant Description</label>
+                        <textarea class='form-control' id='description' name='description' rows='3'></textarea>
+                    </div>
+
+                    <div class='form-group'>
+                        <input type='file' name='logo' class='form-control-md'>
+                    </div>
+
+                    <div class='form-group'>
+                        <input type='file' name='images[]' multiple>
+                    </div>
+
+                    <div class='d-flex justify-content-around'>
+                        <button type='submit' class='btn btn-primary'>Add</button>
+                        <a href="{{route('restaurants.index')}}"
+                           class='btn btn-primary'>Back</a>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

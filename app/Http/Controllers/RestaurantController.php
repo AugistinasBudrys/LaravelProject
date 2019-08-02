@@ -8,6 +8,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Contract\RestaurantRepositoryInterface;
 use App\Contract\EventRepositoryInterface;
+use Illuminate\Support\Facades\URL;
+use mysql_xdevapi\Exception;
 
 /**
  * Class RestaurantController
@@ -19,12 +21,12 @@ class RestaurantController extends Controller
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-
+    
     /**
      * @var EventRepositoryInterface
      */
     public $event;
-
+    
     /**
      * RestaurantController constructor.
      * @param RestaurantRepositoryInterface $restaurant
@@ -35,7 +37,7 @@ class RestaurantController extends Controller
         $this->restaurant = $restaurant;
         $this->event = $event;
     }
-
+    
     /**
      * Returns restaurant view
      * View: restaurants/index.blade
@@ -44,9 +46,10 @@ class RestaurantController extends Controller
      */
     public function index(): Renderable
     {
-        return view('restaurants.index')->with('restaurants', $this->restaurant->paginate(10));
+        return view('restaurants.index')->with('restaurants',
+            $this->restaurant->paginate(20));
     }
-
+    
     /**
      * Function for removing restaurants
      *
@@ -64,7 +67,7 @@ class RestaurantController extends Controller
             ->route('restaurants.index')
             ->with('warning', 'This restaurant cannot be deleted');
     }
-
+    
     /**
      * Returns the view of the restaurant entry page
      * View: restaurants/create.blade
@@ -73,9 +76,9 @@ class RestaurantController extends Controller
      */
     public function create(): Renderable
     {
-        return view('restaurants.create')->with('events');
+        return view('restaurants.create');
     }
-
+    
     /**
      * Stores new restaurant entry into database
      *
@@ -91,14 +94,40 @@ class RestaurantController extends Controller
             'work_time_from' => 'required',
             'work_time_to' => 'required',
             'phone_number' => 'required',
-            'URL' => 'required'
+            'URL' => 'required',
+            'logo' => 'required',
+            'images' => 'required'
         ]);
-
-        $this->restaurant->create($request);
-
+        try {
+            $parameters = $request->all();
+            $logo = $request->logo->store('img');
+            $parameters['logo'] = URL::to('/') . '/storage/' . $logo;
+            //$imageName = time().'.'.request()->image->getClientOriginalExtension();
+            //$imageName = time() . '.' . 'test';
+            //request()->image->move(public_path('images'), $imageName);
+            //dd($request);
+            /*foreach ($request->images as $image) {
+                $image_name = $request->image->store('img');
+                $parameters['image'] = URL::to('/') . '/storage/' . $image_name;
+            }*/
+            
+            foreach ($request->images as $image) {
+                $image_name = $image->store('img');
+//                $parameters['images'] = URL::to('/') . '/storage/' . $image_name;
+                $img_array[] = URL::to('/') . '/storage/' . $image_name;;
+            }
+            
+            $image = new Restaurant();
+            $parameters['images'] = json_encode($img_array);
+//            dd(json_encode($img_array));exit;
+            $this->restaurant->create($parameters);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+        
         return redirect()->route('restaurants.index');
     }
-
+    
     /**
      * Edit restaurant entries view
      * View: restaurants/edit.blade
@@ -110,7 +139,7 @@ class RestaurantController extends Controller
     {
         return view('restaurants.edit', compact('restaurant'));
     }
-
+    
     /**
      * Update edited restaurant entries
      *
@@ -127,25 +156,19 @@ class RestaurantController extends Controller
             'work_time' => 'required',
             'phone_number' => 'optional'
         ]);
-
+        
         $restaurant->update($request->all());
-
+        
         return redirect()->route('restaurants.index');
     }
-
-    /**
-     * @param int $restaurant_id
-     * @param int $event_id
-     * @return RedirectResponse
-     */
-    public function add(int $restaurant_id, int $event_id): RedirectResponse
+    
+    public function moreRestaurantInfo(int $id): Renderable
     {
-        $restaurant = $this->restaurant->find($restaurant_id);
-        $restaurant->eventRestaurants()->attach($event_id);
-
-        return redirect()->route('events.description', [
-            'event' => $this->event->find($event_id),
-            'restaurants' => $this->restaurant->all()
+        $restaurant = $this->restaurant->find($id);
+        $images = json_decode($restaurant->images);
+        return view('restaurants.description', [
+            'restaurant' => $restaurant,
+            'images' => $images
         ]);
     }
 }

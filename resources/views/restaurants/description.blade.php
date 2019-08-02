@@ -1,16 +1,16 @@
 @extends('layouts.app')
+
 @section('content')
 
     <div class='container'>
 
         <div class='row'>
 
-            <div class='col-md-9'>
+            <div class='col-md'>
 
                 <!-- Pavadinimas ir Join mygtukas -->
                 <div class='d-md-flex justify-content-between'>
-                    <h2 class='mt-2'>Restorano pavadinimas</h2>
-                    <button type='button' class='btn btn-primary btn-sm my-2'>Join</button>
+                    <h2 class='mt-2'>{{$restaurant->name}}</h2>
                 </div>
 
                 <hr>
@@ -19,16 +19,22 @@
                 <hr>
 
                 <!-- Image -->
-                <div class='p-2'><img class='img-fluid' src='http://placehold.it/900x300' alt=''></div>
+                <div class='p-2'><img class='img-fluid' src='{{$restaurant->logo}}' alt=''></div>
                 <hr>
 
-                <!-- 5 smaller images -->
+                <!-- 5 smaller images
                 <div class='d-md-flex align-items-start'>
                     <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
                     <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
                     <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
                     <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
                     <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
+                </div>-->
+
+                <div class='d-md-flex align-items-start'>
+                    @foreach($images as $image)
+                        <div class='p-2'><img class='img-fluid' src='{{$image}}' alt=''></div>
+                    @endforeach
                 </div>
 
                 <hr>
@@ -37,38 +43,26 @@
                 <div class='card'>
                     <h5 class='card-header'>Description</h5>
                     <div class='card-body'>
-                        <p class='card-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero,
-                            obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis
-                            eligendi eos magni recusandae laborum minus inventore?</p>
+                        <p class='card-text'>{{$restaurant->description}}</p>
                     </div>
                 </div>
 
                 <hr>
 
                 <!-- Papildoma informacija -->
-                <div class='card w-50 my-2'>
+                <div class='card w-50'>
+                    <h5 class='card-header'>Papildoma informacija</h5>
                     <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 1</h5>
-                        <p class='card-text'>Meniu</p>
-                    </div>
-                </div>
-
-                <div class='card w-50 my-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 2</h5>
-                        <p class='card-text'>Atsiliepimai</p>
-                    </div>
-                </div>
-
-                <div class='card w-50 my-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 3</h5>
-                        <p class='card-text'>Kontaktai</p>
+                        <p class='card-text'>{{$restaurant->address}}</p>
+                        <p class='card-text'>{{$restaurant->phone_number}}</p>
+                        <p class='card-text'>{{$restaurant->work_time_from}}-{{$restaurant->work_time_to}}</p>
+                        <a href='{{$restaurant->URL}}'>Tinklalapis</a>
                     </div>
                 </div>
 
             </div>
 
+            @hasrole('admin')
             <div class='col-lg-3'>
 
                 <!-- Administratoriaus veikla -->
@@ -76,13 +70,13 @@
                     <h5 class='card-header'>Administratorius</h5>
                     <div class='card-body'>
                         <h6 class='card-title'>Administratoriaus veiksmai</h6>
-                        <a href='#' class='btn btn-primary my-2'>Prideti restoraną</a>
                         <a href='#' class='btn btn-primary my-2'>Ištrinti restoraną</a>
                         <a href='#' class='btn btn-primary my-2'>Redaguoti restoraną</a>
                     </div>
                 </div>
 
             </div>
+            @endhasrole
 
         </div>
     </div>
