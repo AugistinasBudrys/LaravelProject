@@ -20,7 +20,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', 'EventController@index')->name('events.index');
 
     Route::get('/restaurants', 'RestaurantController@index')->name('restaurants.index');
-
+    Route::get('/restaurants/{restaurant}/description', 'RestaurantController@moreRestaurantInfo')->name('restaurant.description');
+    
     Route::get('/events/{event}/description', 'EventController@moreInfo')->name('events.description');
     Route::post('/events/join', 'JsonController@join')->name('events.join');
     Route::post('/events/vote', 'JsonController@vote')->name('events.vote');
@@ -45,4 +46,3 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
     });
 });
-

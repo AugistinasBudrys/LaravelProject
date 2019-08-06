@@ -27,12 +27,12 @@ class EventController extends Controller
      * @var UserRepositoryInterface
      */
     public $user;
-
+    
     /**
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-
+    
     public $vote;
 
     /**
@@ -54,7 +54,7 @@ class EventController extends Controller
         $this->restaurant = $restaurant;
         $this->vote = $vote;
     }
-
+    
     /**
      * Returns the view of the event index page
      * View: events/index.blade
@@ -67,7 +67,7 @@ class EventController extends Controller
             'events' => $this->event->getEvents(4)
         ]);
     }
-
+    
     /**
      * Function for removing events
      *
@@ -85,7 +85,7 @@ class EventController extends Controller
             ->route('events.index')
             ->with('warning', 'This event cannot be deleted');
     }
-
+    
     /**
      * Returns the view of the event creation page
      * View: events/create.blade
@@ -96,7 +96,7 @@ class EventController extends Controller
     {
         return view('events.create')->with('events');
     }
-
+    
     /**
      * Stores new event into database
      *
@@ -112,12 +112,12 @@ class EventController extends Controller
             'description' => 'required',
             'address' => 'required'
         ]);
-
+        
         $this->event->create($request);
-
+        
         return redirect()->route('events.index');
     }
-
+    
     /**
      * Returns the view of the event edit
      * View: events/edit.blade
@@ -129,7 +129,7 @@ class EventController extends Controller
     {
         return view('events.edit', compact('event'));
     }
-
+    
     /**
      * Updates the event entries in the database
      *
@@ -144,12 +144,12 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required'
         ]);
-
+        
         $event->update($request->all());
-
+        
         return redirect()->route('events.index');
     }
-
+    
     /**
      * returns event description view
      * View: events/description.blade.php
@@ -162,7 +162,8 @@ class EventController extends Controller
         return view('events.description', [
             'event' => $this->event->find($id),
             'restaurants' => $this->restaurant->all(),
-            'votes' => $this->vote->find($id)
+            'votes' => $this->vote->find($id),
+            'user' => $this->user->current()
         ]);
     }
 }

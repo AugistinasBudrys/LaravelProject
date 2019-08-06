@@ -7,7 +7,6 @@ use App\Contract\RestaurantRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use App\Contract\VoteRepositoryInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class JsonController extends Controller
@@ -72,18 +71,24 @@ class JsonController extends Controller
     {
         $event = $this->event->find($request->event_id);
         $event->restaurants()->sync($request->restaurant_id);
-
         return response()->json($event);
     }
 
-    public function Vote(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function Vote(Request $request): JsonResponse
     {
-        $currentUser = $this->user->current();
-        $request->validate([
-           'event_id' => 'required',
-           'restaurant_id' => 'required'
-        ]);
-        $this->vote->create($request);
+        $check = $this->vote->checkVote($request);
+        if($check === null){
+        $this->vote->firstOrCreate($request);
+        return response()->json();}
+        else if($this->vote->doubleCheck($request) !== null){
+        $this->vote->deleteVote($request);
+        return response()->json();
+        }
+        $this->vote->updateVote($request);
         return response()->json();
     }
 }

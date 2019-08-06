@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
+
     <div class='container'>
-        <div class='row'>
+
+        <div class='row event-padding-block'>
             <div class='col-md'>
                 <div class='d-md-flex justify-content-between'>
                     <h2 class='m-2'>{{$event->name}}</h2>
@@ -42,13 +44,17 @@
                         <h5 class='card-title'>Restaurants for this event</h5>
                         <div id='added-events'>
                         <input type='hidden' id='vote' value='{{$event->id}}'>
+                        <input type='hidden' id='user' value='{{$user->id}}'>
+                        <div  id='vote-count'>
                         @foreach($event->eventRestaurants($event->id) as $names)
-                        <div class='d-md-flex justify-content-between'>
-                                <p class='card-text'>{{$names->name}}</p>
+                        <div class='d-md-flex'>
+                                <p class='card-text col-md-11'>{{$names->name}}</p>
                             <button id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote'>vote</button>
+                            <p class='card-text col-md'>{{$votes->where('restaurant_id', $names->id)->count()}}</p>
                             </div>
                         @endforeach
-                       </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,7 +65,6 @@
                     <div class='card-body'>
                         <h6 class='card-title'>Admin actions</h6>
                         <button class='btn btn-primary my-2 addRest' name='add' value='add' id='{{$event->id}}'>Add restaurant</button>
-
                         <button id='yes' class='btn btn-primary my-2'>Delete event</button>
                         <a href='#' class='btn btn-primary my-2'>Edit event</a>
                     </div>
@@ -68,6 +73,5 @@
             @endhasrole
         </div>
         </div>
-    </div>
     @include('events/add',['event'=>$event, 'restaurants'=>$restaurants])
 @endsection

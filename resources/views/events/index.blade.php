@@ -10,7 +10,8 @@
     </div>
     @endhasrole
     @if($events->first() !== null)
-
+<div class="card event-padding-block">
+    <div class='card-body'>
         <div class='row align-items-baseline my-6'>
             <div class='col-md-12'>
                 <h1 class='font-weight-light'>{{$events->first()->name}}
@@ -35,11 +36,8 @@
                 </div>
             </div>
         </div>
-        <div class='card text-white bg-secondary my-5 py-4 text-center'>
-            <div class='card-body'>
-                <p class='text-white m-0'>Following events</p>
-            </div>
-        </div>
+    </div>
+</div>
         <div class='container'>
             <div class='row col-md-12'>
                 @foreach($events as $event)

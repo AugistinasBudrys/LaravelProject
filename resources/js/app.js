@@ -95,18 +95,22 @@ $('.Add').click(function (e) {
     })
 });
 
-$('.vote').click(function (e) {
+$(document).on('click', '.vote', function (e) {
     e.preventDefault();
     var event_id = $('#vote').val();
     var restaurant_id = e.target.id;
-    console.log(event_id);
-    console.log(restaurant_id);
+    var user_id = $('#user').val();
     $.ajax({
         type: 'POST',
         url: '/events/vote',
-        data: {event_id: event_id, restaurant_id: restaurant_id},
+        data: {
+            event_id: event_id,
+            restaurant_id: restaurant_id,
+            user_id: user_id
+        },
         dataType: 'json',
         success: function (data) {
+            $('#vote-count').load(document.URL + ' #vote-count');
         },
         error: function (e) {
             console.log(e);
