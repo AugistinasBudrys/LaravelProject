@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/events', 'EventController@store')->name('events.store');
         Route::get('/events/create', 'EventController@create')->name('events.create');
-        //Route::put('/events/{event}', 'EventController@update')->name('events.update');
-        Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
+        Route::put('/events/{event}', 'EventController@update')->name('events.update');
+        Route::delete('/events/description/{event}', 'EventController@destroy')->name('events.destroy');
         Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
         Route::post('/events/assign/restaurant', 'JsonController@addRestaurant')->name('events.add');
 

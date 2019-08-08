@@ -1,4 +1,4 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name='csrf-token' content='{{ csrf_token() }}'>
 <nav class='navbar navbar-expand-sm navbar-light bg-light nav-border'>
     <div class='container'>
 

@@ -43,5 +43,5 @@ interface EventRepositoryInterface
      */
     public function getEvents(int $num): Collection;
 
-    public function joinEvent(int $event_id);
+    public function joinEvent(int $event_id): bool;
 }

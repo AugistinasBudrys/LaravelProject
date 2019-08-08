@@ -31,12 +31,14 @@ const app = new Vue({
     el: '#app',
 });
 
+//csrf token input
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
+//event join query
 $(document).ready(function () {
     $('.join').click(function (e) {
         e.preventDefault();
@@ -58,6 +60,7 @@ $(document).ready(function () {
     });
 });
 
+//changes the button upon join
 $('.join').on('click', function () {
     var el = $(this);
     if (el.text() === el.data('text-swap')) {
@@ -68,11 +71,13 @@ $('.join').on('click', function () {
     }
 });
 
+//open the add restaurant modal
 $(document).on('click', '.addRest', function (e) {
     e.preventDefault();
     $('#edit-item').modal('show');
 });
 
+//query for creating restaurant, event dependency
 $('.Add').click(function (e) {
     e.preventDefault();
     var event_id = $('#eventId').val();
@@ -95,6 +100,7 @@ $('.Add').click(function (e) {
     })
 });
 
+// query for registering votes
 $(document).on('click', '.vote', function (e) {
     e.preventDefault();
     var event_id = $('#vote').val();
@@ -116,4 +122,10 @@ $(document).on('click', '.vote', function (e) {
             console.log(e);
         }
     })
+});
+
+//delete event modal display
+$(document).on('click', '#yes', function(e){
+    e.preventDefault();
+    $('#delete-event').modal('show');
 });

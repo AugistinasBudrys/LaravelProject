@@ -32,7 +32,10 @@ class EventController extends Controller
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-    
+
+    /**
+     * @var VoteRepositoryInterface
+     */
     public $vote;
 
     /**
@@ -76,6 +79,7 @@ class EventController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
+        $this->vote->eventRemove($id);
         if ($this->event->deleteEvent($id) === true) {
             return redirect()
                 ->route('events.index')
@@ -141,8 +145,10 @@ class EventController extends Controller
     {
         $request->validate([
             'date' => 'required',
+            'time' => 'required',
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'address' => 'required'
         ]);
         
         $event->update($request->all());

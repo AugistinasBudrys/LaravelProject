@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -188,9 +189,9 @@ class Event extends Model
 
     /**
      * @param int $id
-     * @return array
+     * @return Collection
      */
-    public function eventRestaurants(int $id)
+    public function eventRestaurants(int $id): Collection
     {
         $event = $this->find($id);
         return $event->restaurants()->get()->sortBy('id');

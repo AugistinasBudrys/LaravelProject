@@ -10,7 +10,7 @@
     </div>
     @endhasrole
     @if($events->first() !== null)
-<div class="card event-padding-block">
+<div class='card event-padding-block'>
     <div class='card-body'>
         <div class='row align-items-baseline my-6'>
             <div class='col-md-12'>

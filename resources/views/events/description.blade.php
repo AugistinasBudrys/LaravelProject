@@ -43,17 +43,23 @@
                     <div class='card-body'>
                         <h5 class='card-title'>Restaurants for this event</h5>
                         <div id='added-events'>
-                        <input type='hidden' id='vote' value='{{$event->id}}'>
-                        <input type='hidden' id='user' value='{{$user->id}}'>
-                        <div  id='vote-count'>
-                        @foreach($event->eventRestaurants($event->id) as $names)
-                        <div class='d-md-flex'>
-                                <p class='card-text col-md-11'>{{$names->name}}</p>
-                            <button id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote'>vote</button>
-                            <p class='card-text col-md'>{{$votes->where('restaurant_id', $names->id)->count()}}</p>
+                            <input type='hidden' id='vote' value='{{$event->id}}'>
+                            <input type='hidden' id='user' value='{{$user->id}}'>
+                            <div id='vote-count'>
+                                @foreach($event->eventRestaurants($event->id) as $names)
+                                    <div class='d-md-flex'>
+                                        <p class='card-text col-md-10'>{{$names->name}}</p>
+                                        @if($votes->where('restaurant_id' , $names->id)->where('user_id', $user->id)->first() === null)
+                                            <button type='submit' id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote col-md-1'>Vote
+                                            </button>
+                                        @else
+                                            <button type='submit' id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote col-md-1'>Unvote
+                                            </button>
+                                        @endif
+                                        <p class='card-text col-md-1'>{{$votes->where('restaurant_id', $names->id)->count()}}</p>
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -64,14 +70,40 @@
                     <h5 class='card-header'>Admin</h5>
                     <div class='card-body'>
                         <h6 class='card-title'>Admin actions</h6>
-                        <button class='btn btn-primary my-2 addRest' name='add' value='add' id='{{$event->id}}'>Add restaurant</button>
+                        <button class='btn btn-primary my-2 addRest' name='add' value='add' id='{{$event->id}}'>Add
+                            restaurant
+                        </button>
+                        <div class='modal fade' id='delete-event' tabindex='-1' role='dialog'
+                             aria-labelledby='myModalLabel'>
+                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                <div class='modal-content'>
+                                    <div class='modal-body text-center'>
+                                    Are you sure you want to delete this event?
+                                    </div>
+                                    <div class='modal-body row'>
+                                        <form action="{{route('events.destroy',$event->id)}}" method='POST'
+                                              class='col-md-6'>
+                                            {{method_field('DELETE')}}
+                                            @csrf
+                                            <button type='submit' class='btn-primary float-right'>Yes</button>
+                                        </form>
+                                        <button type='button' class='btn-primary' id='dismiss'
+                                                data-dismiss='modal'>No
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <button id='yes' class='btn btn-primary my-2'>Delete event</button>
-                        <a href='#' class='btn btn-primary my-2'>Edit event</a>
+                        <a href="{{route('events.edit', $event->id)}}">
+                            <button type='button' class='btn btn-primary my-2'>Edit event</button>
+                        </a>
+
                     </div>
                 </div>
             </div>
             @endhasrole
         </div>
-        </div>
+    </div>
     @include('events/add',['event'=>$event, 'restaurants'=>$restaurants])
 @endsection

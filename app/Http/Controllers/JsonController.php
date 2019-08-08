@@ -9,6 +9,10 @@ use App\Contract\VoteRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Class JsonController
+ * @package App\Http\Controllers
+ */
 class JsonController extends Controller
 {
 
@@ -50,6 +54,8 @@ class JsonController extends Controller
     }
 
     /**
+     * Event join function
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -64,6 +70,8 @@ class JsonController extends Controller
     }
 
     /**
+     * Function used to attach restaurants to events
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -71,10 +79,13 @@ class JsonController extends Controller
     {
         $event = $this->event->find($request->event_id);
         $event->restaurants()->sync($request->restaurant_id);
+        $this->vote->voteClean($request);
         return response()->json($event);
     }
 
     /**
+     * Function for registering votes
+     *
      * @param Request $request
      * @return JsonResponse
      */

@@ -20,7 +20,7 @@ interface VoteRepositoryInterface
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return Vote
      */
     public function create(Request $request): Vote;
 
@@ -31,7 +31,7 @@ interface VoteRepositoryInterface
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return Vote
      */
     public function firstOrCreate(Request $request): Vote;
 
@@ -55,7 +55,19 @@ interface VoteRepositoryInterface
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return int
      */
     public function updateVote(Request $request): int;
+
+    /**
+     * @param int $event_id
+     * @return Vote
+     */
+    public function eventRemove(int $event_id): int;
+
+    /**
+     * @param Request $request
+     * @return int
+     */
+    public function voteClean(Request $request): int;
 }
