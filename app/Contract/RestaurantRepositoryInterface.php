@@ -14,21 +14,21 @@ interface RestaurantRepositoryInterface
 {
     /**
      * @param int $pag
-     * @return LengthAwarePaginator
+     * @return mixed
      */
-    public function paginate(int $pag): LengthAwarePaginator;
+    public function paginate(int $pag);
 
     /**
      * @param int $restaurantId
      * @return bool
      */
     public function removeRestaurant(int $restaurantId): bool;
-
+    
     /**
-     * @param Request $request
+     * @param array $params
      * @return Restaurant
      */
-    public function create(Request $request): Restaurant;
+    public function create(array $params): Restaurant;
 
     /**
      * @return Restaurant[]|\Illuminate\Database\Eloquent\Collection|mixed

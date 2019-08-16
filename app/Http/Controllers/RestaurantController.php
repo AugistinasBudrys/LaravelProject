@@ -8,6 +8,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Contract\RestaurantRepositoryInterface;
 use App\Contract\EventRepositoryInterface;
+use Illuminate\Support\Facades\URL;
+use mysql_xdevapi\Exception;
 
 /**
  * Class RestaurantController
@@ -19,12 +21,12 @@ class RestaurantController extends Controller
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-
+    
     /**
      * @var EventRepositoryInterface
      */
     public $event;
-
+    
     /**
      * RestaurantController constructor.
      * @param RestaurantRepositoryInterface $restaurant
@@ -35,7 +37,7 @@ class RestaurantController extends Controller
         $this->restaurant = $restaurant;
         $this->event = $event;
     }
-
+    
     /**
      * Returns restaurant view
      * View: restaurants/index.blade
@@ -44,9 +46,10 @@ class RestaurantController extends Controller
      */
     public function index(): Renderable
     {
-        return view('restaurants.index', ['restaurants'=>$this->restaurant->all()]);
+        return view('restaurants.index')->with('restaurants',
+            $this->restaurant->paginate(5));
     }
-
+    
     /**
      * Function for removing restaurants
      *
@@ -64,7 +67,7 @@ class RestaurantController extends Controller
             ->route('restaurants.index')
             ->with('warning', 'This restaurant cannot be deleted');
     }
-
+    
     /**
      * Returns the view of the restaurant entry page
      * View: restaurants/create.blade
@@ -73,9 +76,9 @@ class RestaurantController extends Controller
      */
     public function create(): Renderable
     {
-        return view('restaurants.create')->with('events');
+        return view('restaurants.create');
     }
-
+    
     /**
      * Stores new restaurant entry into database
      *
@@ -91,14 +94,28 @@ class RestaurantController extends Controller
             'work_time_from' => 'required',
             'work_time_to' => 'required',
             'phone_number' => 'required',
-            'URL' => 'required'
+            'URL' => 'required',
+            'logo' => 'required',
+            'images' => 'required'
         ]);
-
-        $this->restaurant->create($request);
-
+        try {
+            $parameters = $request->all();
+            $logo = $request->logo->store('img');
+            $parameters['logo'] = URL::to('/') . '/storage/' . $logo;
+            
+            foreach ($request->images as $image) {
+                $image_name = $image->store('img');
+                $img_array[] = URL::to('/') . '/storage/' . $image_name;;
+            }
+            $parameters['images'] = json_encode($img_array);
+            $this->restaurant->create($parameters);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+        
         return redirect()->route('restaurants.index');
     }
-
+    
     /**
      * Edit restaurant entries view
      * View: restaurants/edit.blade
@@ -110,7 +127,7 @@ class RestaurantController extends Controller
     {
         return view('restaurants.edit', compact('restaurant'));
     }
-
+    
     /**
      * Update edited restaurant entries
      *
@@ -124,12 +141,22 @@ class RestaurantController extends Controller
             'name' => 'required',
             'address' => 'required',
             'description' => 'required',
-            'work_time' => 'required',
-            'phone_number' => 'optional'
+            'work_time_from' => 'required',
+            'work_time_to' => 'required',
+            'phone_number' => 'required',
+            'URL' => 'required'
         ]);
-
+        
         $restaurant->update($request->all());
-
+        
         return redirect()->route('restaurants.index');
     }
+    
+    public function moreRestaurantInfo(int $id): Renderable
+    {$restaurant = $this->restaurant->find($id);
+        $images = json_decode($restaurant->images);
+        return view('restaurants.description', [
+            'restaurant' => $restaurant,
+            'images' => $images
+        ]);}
 }

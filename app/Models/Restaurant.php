@@ -21,7 +21,9 @@ class Restaurant extends Model
         'work_time_from',
         'work_time_to',
         'phone_number',
-        'URL'
+        'URL',
+        'logo',
+        'images'
     ];
 
     /**
@@ -161,6 +163,7 @@ class Restaurant extends Model
         $restaurant = $this->find($id);
         if ($restaurant) {
             $restaurant->eventRestaurants()->detach();
+            Vote::where('restaurant_id', $id)->delete();
             $restaurant->delete();
             return true;
         }

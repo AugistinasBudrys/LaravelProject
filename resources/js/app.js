@@ -129,3 +129,8 @@ $(document).on('click', '#yes', function(e){
     e.preventDefault();
     $('#delete-event').modal('show');
 });
+
+$(document).on('click', '#restaurant-delete', function(e){
+    e.preventDefault();
+    $('#delete-restaurant').modal('show');
+});

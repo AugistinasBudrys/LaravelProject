@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/restaurants', 'RestaurantController@store')->name('restaurants.store');
         Route::get('/restaurants/create', 'RestaurantController@create')->name('restaurants.create');
-        Route::delete('/restaurants/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
+        Route::delete('/restaurants/description/{restaurant}', 'RestaurantController@destroy')->name('restaurants.destroy');
         Route::put('/restaurants/{restaurant}', 'RestaurantController@update')->name('restaurants.update');
         Route::get('/restaurants/{restaurant}/edit', 'RestaurantController@edit')->name('restaurants.edit');
     });
