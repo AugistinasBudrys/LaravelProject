@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Contract\EventRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use Auth;
+use Illuminate\Support\Facades\URL;
 
 /**
  * Class EventController
@@ -32,13 +33,14 @@ class EventController extends Controller
      * @var RestaurantRepositoryInterface
      */
     public $restaurant;
-<<<<<<< HEAD
     
-=======
-
+    public $vote;
+    
+    /**
+     * @var VoteRepositoryInterface
+     */
     public $vote;
 
->>>>>>> mergebranch
     /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
@@ -80,6 +82,7 @@ class EventController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
+        $this->vote->eventRemove($id);
         if ($this->event->deleteEvent($id) === true) {
             return redirect()
                 ->route('events.index')
@@ -114,11 +117,21 @@ class EventController extends Controller
             'time' => 'required',
             'name' => 'required',
             'description' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'image' => 'required'
         ]);
+<<<<<<< HEAD
+        $parameters=$request->all();
+        $image = $request->image->store('img');
+        $parameters['image'] = URL::to('/') . '/storage/' . $image;
+        
+        $this->event->create($parameters);
+    
+=======
         
         $this->event->create($request);
         
+>>>>>>> origin/task-#5
         return redirect()->route('events.index');
     }
     
@@ -145,8 +158,10 @@ class EventController extends Controller
     {
         $request->validate([
             'date' => 'required',
+            'time' => 'required',
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'address' => 'required'
         ]);
         
         $event->update($request->all());
@@ -166,28 +181,12 @@ class EventController extends Controller
         return view('events.description', [
             'event' => $this->event->find($id),
             'restaurants' => $this->restaurant->all(),
+<<<<<<< HEAD
             'votes' => $this->vote->find($id)
+=======
+            'votes' => $this->vote->find($id),
+            'user' => $this->user->current()
+>>>>>>> origin/task-#5
         ]);
     }
-<<<<<<< HEAD
-    
-    /**
-     * @param int $event_id
-     * @return RedirectResponse
-     */
-    public function join(int $event_id): RedirectResponse
-    {
-        
-        if ($this->event->joinEvent($event_id)) {
-            return redirect()->route('events.description', [
-                'event' => $this->event->find($event_id)
-            ])->with('success', 'you have left :(');
-        }
-        return redirect()->route('events.description', [
-            'event' => $this->event->find($event_id)
-        ])->with('success', 'you have successfully joined \(*.*)/');
-    }
 }
-=======
-}
->>>>>>> mergebranch

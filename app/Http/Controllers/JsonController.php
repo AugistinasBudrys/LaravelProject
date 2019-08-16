@@ -7,9 +7,12 @@ use App\Contract\RestaurantRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use App\Contract\VoteRepositoryInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Class JsonController
+ * @package App\Http\Controllers
+ */
 class JsonController extends Controller
 {
 
@@ -51,6 +54,8 @@ class JsonController extends Controller
     }
 
     /**
+     * Event join function
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -65,6 +70,8 @@ class JsonController extends Controller
     }
 
     /**
+     * Function used to attach restaurants to events
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -72,18 +79,27 @@ class JsonController extends Controller
     {
         $event = $this->event->find($request->event_id);
         $event->restaurants()->sync($request->restaurant_id);
-
+        $this->vote->voteClean($request);
         return response()->json($event);
     }
 
-    public function Vote(Request $request)
+    /**
+     * Function for registering votes
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function Vote(Request $request): JsonResponse
     {
-        $currentUser = $this->user->current();
-        $request->validate([
-           'event_id' => 'required',
-           'restaurant_id' => 'required'
-        ]);
-        $this->vote->create($request);
+        $check = $this->vote->checkVote($request);
+        if($check === null){
+        $this->vote->firstOrCreate($request);
+        return response()->json();}
+        else if($this->vote->doubleCheck($request) !== null){
+        $this->vote->deleteVote($request);
+        return response()->json();
+        }
+        $this->vote->updateVote($request);
         return response()->json();
     }
 }

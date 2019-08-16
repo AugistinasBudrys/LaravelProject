@@ -16819,7 +16819,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.14';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -49217,12 +49217,14 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-});
+}); //csrf token input
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
-});
+}); //event join query
+
 $(document).ready(function () {
   $('.join').click(function (e) {
     e.preventDefault();
@@ -49242,7 +49244,8 @@ $(document).ready(function () {
       }
     });
   });
-});
+}); //changes the button upon join
+
 $('.join').on('click', function () {
   var el = $(this);
 
@@ -49252,11 +49255,13 @@ $('.join').on('click', function () {
     el.data('text-original', el.text());
     el.text(el.data('text-swap'));
   }
-});
+}); //open the add restaurant modal
+
 $(document).on('click', '.addRest', function (e) {
   e.preventDefault();
   $('#edit-item').modal('show');
-});
+}); //query for creating restaurant, event dependency
+
 $('.Add').click(function (e) {
   e.preventDefault();
   var event_id = $('#eventId').val();
@@ -49280,26 +49285,34 @@ $('.Add').click(function (e) {
       console.log(e);
     }
   });
-});
-$('.vote').click(function (e) {
+}); // query for registering votes
+
+$(document).on('click', '.vote', function (e) {
   e.preventDefault();
   var event_id = $('#vote').val();
   var restaurant_id = e.target.id;
-  console.log(event_id);
-  console.log(restaurant_id);
+  var user_id = $('#user').val();
   $.ajax({
     type: 'POST',
     url: '/events/vote',
     data: {
       event_id: event_id,
-      restaurant_id: restaurant_id
+      restaurant_id: restaurant_id,
+      user_id: user_id
     },
     dataType: 'json',
-    success: function success(data) {},
+    success: function success(data) {
+      $('#vote-count').load(document.URL + ' #vote-count');
+    },
     error: function error(e) {
       console.log(e);
     }
   });
+}); //delete event modal display
+
+$(document).on('click', '#yes', function (e) {
+  e.preventDefault();
+  $('#delete-event').modal('show');
 });
 
 /***/ }),

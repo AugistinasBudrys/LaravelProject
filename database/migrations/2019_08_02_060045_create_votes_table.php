@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateVotesTable
+ */
 class CreateVotesTable extends Migration
 {
     /**
@@ -17,6 +20,7 @@ class CreateVotesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('event_id')->unsigned();
             $table->integer('restaurant_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

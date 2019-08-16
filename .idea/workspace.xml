@@ -5,64 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f315f8c9-990d-4b71-b1cf-453dca3b8450" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Contract/VoteRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/DefaultController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/JsonController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Vote.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/VoteRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_02_060045_create_votes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_02_090432_create_user_vote_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/small-business.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/events/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/events/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Contract/EventRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contract/EventRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Contract/RestaurantRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contract/RestaurantRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Contract/VoteRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contract/VoteRepositoryInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php.orig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php.orig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RestaurantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RestaurantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AcessAdmin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JsonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JsonController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Vote.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Vote.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Repositories/EventRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/EventRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/RestaurantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/RestaurantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_16_092531_create_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_16_092531_create_events_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/VoteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/VoteRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_16_110419_create_restaurants_table.php.orig" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_16_110419_create_restaurants_table.php.orig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_16_110506_create_event_restaurant_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_16_110506_create_event_restaurant_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_02_060045_create_votes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_02_060045_create_votes_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/custom.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/events/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/events/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/events/description.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/description.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/events/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/alerts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/alerts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/restaurants/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restaurants/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/restaurants/description.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restaurants/description.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/restaurants/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/restaurants/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php.orig" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php.orig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,20 +48,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/restaurants/description.blade.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/events/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+            <state relative-caret-position="-85">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/restaurants/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/events/description.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            <state relative-caret-position="-765" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/partials/footer.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/events/add.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="38" lean-forward="true" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RestaurantController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EventController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1399">
+              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -279,7 +270,7 @@
       <path value="$PROJECT_DIR$/vendor/bootstrap/js" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="950" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -508,7 +499,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="411913000" />
+    <option name="totallyTimeSpent" value="412562000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,13 +594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="95" column="52" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/events/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="56" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -791,11 +775,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/partials/footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Contract/EventRepositoryInterface.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -813,11 +793,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RestaurantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="122" column="34" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
-          <folding>
-            <element signature="e#40#66#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -830,19 +807,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EventController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="118" column="67" selection-start-line="118" selection-start-column="67" selection-end-line="118" selection-end-column="67" />
-          <folding>
-            <element signature="e#40#87#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1399">
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/events/description.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="109" selection-start-line="21" selection-start-column="109" selection-end-line="21" selection-end-column="109" />
-        </state>
+        <state relative-caret-position="-765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/auth/verify.blade.php">
@@ -854,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/events/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        <state relative-caret-position="-85">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -887,6 +859,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
           <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/events/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="38" lean-forward="true" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
         </state>
       </provider>
     </entry>

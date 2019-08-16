@@ -49,6 +49,8 @@ class EventRepository implements EventRepositoryInterface
     }
 
     /**
+     * finds the event
+     *
      * @param int $id
      * @return Event
      */
@@ -58,6 +60,8 @@ class EventRepository implements EventRepositoryInterface
     }
 
     /**
+     * gets the events for the index
+     *
      * @param int $num
      * @return Collection
      */
@@ -70,7 +74,13 @@ class EventRepository implements EventRepositoryInterface
             ->take($num);
     }
 
-    public function joinEvent(int $event_id)
+    /**
+     * checks if a user has joined the event
+     *
+     * @param int $event_id
+     * @return bool
+     */
+    public function joinEvent(int $event_id): bool
     {
         $event = Event::find($event_id);
         $user = Auth::User();

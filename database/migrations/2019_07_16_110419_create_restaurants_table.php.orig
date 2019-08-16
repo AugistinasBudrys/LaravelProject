@@ -30,7 +30,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('images')->nullable();
 =======
             $table->string('image')->nullable();
->>>>>>> mergebranch
+>>>>>>> origin/task-#5
             $table->timestamps();
 
         });
