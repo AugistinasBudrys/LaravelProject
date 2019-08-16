@@ -40,10 +40,10 @@
                         <textarea class='form-control' id='event-description' name='description'
                                   placeholder='description' rows='3'>{{$event->description}}</textarea>
                     </div>
-                    <div class='d-flex justify-content-around'>
-                        <button type='submit' class='btn btn-primary'>Add</button>
+                    <div class='d-flex justify-content-center'>
+                        <button type='submit' class='btn btn-primary mr-5'>Add</button>
                         <a href="{{route('events.description',['event' => $event->id])}}"
-                           class='btn btn-primary'>back</a>
+                           class='btn btn-primary'>Back</a>
                     </div>
                 </form>
             </div>

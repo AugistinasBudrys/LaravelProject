@@ -141,6 +141,7 @@ class Event extends Model
             $event->eventUsers()->detach();
             $event->restaurants()->detach();
             $event->delete();
+            Vote::where('event_id', $id)->delete();
             return true;
         }
         return false;

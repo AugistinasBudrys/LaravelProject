@@ -23,7 +23,6 @@
                 <div class='event-padding-block'><img class='img-fluid' src='{{$event->image}}' alt=''></div>
                 <div class='card event-padding-block'>
                     <h5 class='card-header'>{{trans('events.description')}}</h5>
-                    <h5 class='card-header'>Description</h5>
                     <div class='card-body'>
                         <p class='card-text'>{{$event->description}}</p>
                     </div>
@@ -49,10 +48,12 @@
                                     <div class='d-md-flex'>
                                         <p class='card-text col-md-10'>{{$names->name}}</p>
                                         @if($votes->where('restaurant_id' , $names->id)->where('user_id', $user->id)->first() === null)
-                                            <button type='submit' id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote col-md-1'>Vote
+                                            <button type='submit' id='{{$names->id}}'
+                                                    class='btn-primary btn-sm mb-2 vote col-md-1'>{{trans('events.btn_vote')}}
                                             </button>
                                         @else
-                                            <button type='submit' id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote col-md-1'>Unvote
+                                            <button type='submit' id='{{$names->id}}'
+                                                    class='btn-primary btn-sm mb-2 vote col-md-1'>{{trans('events.btn_unvote')}}
                                             </button>
                                         @endif
                                         <p class='card-text col-md-1'>{{$votes->where('restaurant_id', $names->id)->count()}}</p>
@@ -69,33 +70,34 @@
                     <h5 class='card-header'>{{trans('events.admin')}}</h5>
                     <div class='card-body'>
                         <h6 class='card-title'>{{trans('events.actions')}}</h6>
-                        <button class='btn btn-primary my-2 addRest' name='add' value='add' id='{{$event->id}}'>Add
-                            restaurant
+                        <button class='btn btn-primary my-2 addRest' name='add' value='add'
+                                id='{{$event->id}}'>{{trans('events.add_res')}}
                         </button>
                         <div class='modal fade' id='delete-event' tabindex='-1' role='dialog'
                              aria-labelledby='myModalLabel'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
                                 <div class='modal-content'>
                                     <div class='modal-body text-center'>
-                                    Are you sure you want to delete this event?
+                                        {{trans('events.sure_delete')}}
                                     </div>
                                     <div class='modal-body row'>
                                         <form action="{{route('events.destroy',$event->id)}}" method='POST'
                                               class='col-md-6'>
                                             {{method_field('DELETE')}}
                                             @csrf
-                                            <button type='submit' class='btn-primary float-right'>Yes</button>
+                                            <button type='submit'
+                                                    class='btn-primary float-right'>{{trans('events.btn_yes')}}</button>
                                         </form>
                                         <button type='button' class='btn-primary' id='dismiss'
-                                                data-dismiss='modal'>No
+                                                data-dismiss='modal'>{{trans('events.btn_no')}}
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button id='yes' class='btn btn-primary my-2'>Delete event</button>
+                        <button id='yes' class='btn btn-primary my-2'>{{trans('events.delete')}}</button>
                         <a href="{{route('events.edit', $event->id)}}">
-                            <button type='button' class='btn btn-primary my-2'>Edit event</button>
+                            <button type='button' class='btn btn-primary my-2'>{{trans('events.edit')}}</button>
                         </a>
 
                     </div>

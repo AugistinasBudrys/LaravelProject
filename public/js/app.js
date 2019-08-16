@@ -16819,7 +16819,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.14';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -49313,6 +49313,10 @@ $(document).on('click', '.vote', function (e) {
 $(document).on('click', '#yes', function (e) {
   e.preventDefault();
   $('#delete-event').modal('show');
+});
+$(document).on('click', '#restaurant-delete', function (e) {
+  e.preventDefault();
+  $('#delete-restaurant').modal('show');
 });
 
 /***/ }),

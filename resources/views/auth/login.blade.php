@@ -9,6 +9,7 @@
                 <h2 class='title'>{{trans('users.login')}}</h2>
                 <form method='POST' action="{{ route('login') }}" class='col-12'>
                     @csrf
+                    @csrf
 
                     <div class='form-group' id='login-form'>
                         <input type='email' id='exampleInputEmail1' aria-describedby='emailHelp'
@@ -22,7 +23,6 @@
                         @enderror
                         <small id='emailHelp' class='form-text text-muted'>{{trans('users.never_share')}}</small>
                     </div>
-
                     <div class='form-group'>
                         <input type='password' id='exampleInputPassword1' placeholder='Password'
                                class="form-control @error('password') is-invalid @enderror" name='password'

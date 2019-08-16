@@ -14,9 +14,9 @@ interface RestaurantRepositoryInterface
 {
     /**
      * @param int $pag
-     * @return LengthAwarePaginator
+     * @return mixed
      */
-    public function paginate(int $pag);//: LengthAwarePaginator;
+    public function paginate(int $pag);
 
     /**
      * @param int $restaurantId

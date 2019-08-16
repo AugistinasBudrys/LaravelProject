@@ -1,3 +1,4 @@
+<div class='container'>
 @if(session('success'))
     <div class='alert alert-primary' role='alert'>
         {{session('success')}}
@@ -13,3 +14,4 @@
                             <strong>whoop</strong>
                         </span>
 @enderror
+</div>

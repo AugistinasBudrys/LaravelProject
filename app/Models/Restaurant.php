@@ -163,6 +163,7 @@ class Restaurant extends Model
         $restaurant = $this->find($id);
         if ($restaurant) {
             $restaurant->eventRestaurants()->detach();
+            Vote::where('restaurant_id', $id)->delete();
             $restaurant->delete();
             return true;
         }

@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Contract\RestaurantRepositoryInterface;
 use App\Models\Restaurant;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 /**
  * Class RestaurantRepository
@@ -14,15 +13,12 @@ use Illuminate\Http\Request;
 class RestaurantRepository implements RestaurantRepositoryInterface
 {
     /**
-     * Splits the amount of restaurants shown on the page into different pages
-     *
      * @param int $pag
-     * @return LengthAwarePaginator
+     * @return Restaurant[]|\Illuminate\Database\Eloquent\Collection|LengthAwarePaginator
      */
-    public function paginate(int $pag)//: LengthAwarePaginator
+    public function paginate(int $pag)
     {
         return Restaurant::get()->sortByDesc('created_at');
-        //return Restaurant::paginate($pag);
     }
 
     /**

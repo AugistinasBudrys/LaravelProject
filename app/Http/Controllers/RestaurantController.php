@@ -47,7 +47,7 @@ class RestaurantController extends Controller
     public function index(): Renderable
     {
         return view('restaurants.index')->with('restaurants',
-            $this->restaurant->paginate(20));
+            $this->restaurant->paginate(5));
     }
     
     /**
@@ -102,24 +102,12 @@ class RestaurantController extends Controller
             $parameters = $request->all();
             $logo = $request->logo->store('img');
             $parameters['logo'] = URL::to('/') . '/storage/' . $logo;
-            //$imageName = time().'.'.request()->image->getClientOriginalExtension();
-            //$imageName = time() . '.' . 'test';
-            //request()->image->move(public_path('images'), $imageName);
-            //dd($request);
-            /*foreach ($request->images as $image) {
-                $image_name = $request->image->store('img');
-                $parameters['image'] = URL::to('/') . '/storage/' . $image_name;
-            }*/
             
             foreach ($request->images as $image) {
                 $image_name = $image->store('img');
-//                $parameters['images'] = URL::to('/') . '/storage/' . $image_name;
                 $img_array[] = URL::to('/') . '/storage/' . $image_name;;
             }
-            
-            $image = new Restaurant();
             $parameters['images'] = json_encode($img_array);
-//            dd(json_encode($img_array));exit;
             $this->restaurant->create($parameters);
         } catch (Exception $e) {
             dd($e->getMessage());
@@ -153,8 +141,10 @@ class RestaurantController extends Controller
             'name' => 'required',
             'address' => 'required',
             'description' => 'required',
-            'work_time' => 'required',
-            'phone_number' => 'optional'
+            'work_time_from' => 'required',
+            'work_time_to' => 'required',
+            'phone_number' => 'required',
+            'URL' => 'required'
         ]);
         
         $restaurant->update($request->all());
@@ -163,12 +153,10 @@ class RestaurantController extends Controller
     }
     
     public function moreRestaurantInfo(int $id): Renderable
-    {
-        $restaurant = $this->restaurant->find($id);
+    {$restaurant = $this->restaurant->find($id);
         $images = json_decode($restaurant->images);
         return view('restaurants.description', [
             'restaurant' => $restaurant,
             'images' => $images
-        ]);
-    }
+        ]);}
 }

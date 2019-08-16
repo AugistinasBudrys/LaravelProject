@@ -25,5 +25,10 @@ return [
     'image' => 'Image',
     'btn_add' => 'Add',
     'btn_back' => 'Back',
+    'btn_vote' => 'Vote',
+    'btn_unvote' => 'Unvote',
+    'btn_yes' => 'Yes',
+    'btn_no' => 'No',
+    'sure_delete' => 'Are you sure you want to delete this event?',
 
 ];
