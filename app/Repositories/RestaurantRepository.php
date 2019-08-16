@@ -19,9 +19,10 @@ class RestaurantRepository implements RestaurantRepositoryInterface
      * @param int $pag
      * @return LengthAwarePaginator
      */
-    public function paginate(int $pag): LengthAwarePaginator
+    public function paginate(int $pag)//: LengthAwarePaginator
     {
-        return Restaurant::paginate($pag);
+        return Restaurant::get()->sortByDesc('created_at');
+        //return Restaurant::paginate($pag);
     }
 
     /**

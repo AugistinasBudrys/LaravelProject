@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contract\RestaurantRepositoryInterface;
+use App\Contract\VoteRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Renderable;
@@ -10,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Contract\EventRepositoryInterface;
 use App\Contract\UserRepositoryInterface;
 use Auth;
+use Illuminate\Support\Facades\URL;
 
 /**
  * Class EventController
@@ -32,21 +34,26 @@ class EventController extends Controller
      */
     public $restaurant;
     
+    public $vote;
+    
     /**
      * EventController constructor.
      * @param EventRepositoryInterface $event
      * @param UserRepositoryInterface $user
      * @param RestaurantRepositoryInterface $restaurant
+     * @param VoteRepositoryInterface $vote
      */
     public function __construct(
         EventRepositoryInterface $event,
         UserRepositoryInterface $user,
-        RestaurantRepositoryInterface $restaurant
+        RestaurantRepositoryInterface $restaurant,
+        VoteRepositoryInterface $vote
     )
     {
         $this->event = $event;
         $this->user = $user;
         $this->restaurant = $restaurant;
+        $this->vote = $vote;
     }
     
     /**
@@ -104,11 +111,15 @@ class EventController extends Controller
             'time' => 'required',
             'name' => 'required',
             'description' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'image' => 'required'
         ]);
+        $parameters=$request->all();
+        $image = $request->image->store('img');
+        $parameters['image'] = URL::to('/') . '/storage/' . $image;
         
-        $this->event->create($request);
-        
+        $this->event->create($parameters);
+    
         return redirect()->route('events.index');
     }
     
@@ -155,24 +166,8 @@ class EventController extends Controller
     {
         return view('events.description', [
             'event' => $this->event->find($id),
-            'restaurants' => $this->restaurant->all()
+            'restaurants' => $this->restaurant->all(),
+            'votes' => $this->vote->find($id)
         ]);
-    }
-    
-    /**
-     * @param int $event_id
-     * @return RedirectResponse
-     */
-    public function join(int $event_id): RedirectResponse
-    {
-        
-        if ($this->event->joinEvent($event_id)) {
-            return redirect()->route('events.description', [
-                'event' => $this->event->find($event_id)
-            ])->with('success', 'you have left :(');
-        }
-        return redirect()->route('events.description', [
-            'event' => $this->event->find($event_id)
-        ])->with('success', 'you have successfully joined \(*.*)/');
     }
 }

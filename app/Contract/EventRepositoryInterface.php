@@ -24,12 +24,12 @@ interface EventRepositoryInterface
      * @return bool
      */
     public function deleteEvent(int $eventId): bool;
-
+    
     /**
-     * @param Request $request
+     * @param array $request
      * @return Event
      */
-    public function create(Request $request): Event;
+    public function create(array $request): Event;
 
     /**
      * @param int $id

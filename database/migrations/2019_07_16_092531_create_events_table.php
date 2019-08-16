@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->Text('description');
             $table->string('address');
+            $table->string('image')->nullable();
             $table->timestamps();
 
         });

@@ -3,6 +3,7 @@
 
 namespace App\Providers;
 
+use App\Contract\VoteRepositoryInterface;
 use App\Repositories\RestaurantRepository;
 use App\Contract\RestaurantRepositoryInterface;
 use App\Repositories\EventRepository;
@@ -11,6 +12,7 @@ use App\Repositories\UserRepository;
 use App\Contract\UserRepositoryInterface;
 use App\Repositories\RoleRepository;
 use App\Contract\RoleRepositoryInterface;
+use App\Repositories\VoteRepository;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -29,5 +31,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class,RoleRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(RestaurantRepositoryInterface::class, RestaurantRepository::class);
+        $this->app->bind(VoteRepositoryInterface::class, VoteRepository::class);
     }
 }

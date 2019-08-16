@@ -5,7 +5,7 @@
         @hasrole('admin')
         <div class='d-flex justify-content-end my-3'>
             <a href="{{route('restaurants.create')}}" class='float-right'>
-                <button type='button' class='btn btn-primary'>Add restaurant</button>
+                <button type='button' class='btn btn-primary'>{{ trans('restaurants.add_res') }}</button>
             </a>
         </div>
         @endhasrole
@@ -14,9 +14,9 @@
     <div class='container mt-3'>
         <div class='row'>
 
-        @foreach($restaurants as $restaurant)
+            @foreach($restaurants as $restaurant)
 
-                <div class='col-md-12'>
+                <div class='col-md-12 event-padding-block'>
                     <div class='card h-100'>
 
                         <div class='card-body'>
@@ -32,7 +32,7 @@
                                     <p class='card-text'>{{$restaurant->description}}</p>
                                     <div class='d-flex justify-content-end'>
                                         <a href="{{ route('restaurant.description', ['restaurant'=>$restaurant->id]) }}"
-                                           class='btn btn-primary btn-sm'>More Info</a>
+                                           class='btn btn-primary btn-sm'>{{ trans('restaurants.btn_more') }}</a>
                                     </div>
                                 </div>
 

@@ -5,7 +5,7 @@
     <div class="modal-dialog text-center">
         <div class="col-sm-9 main-section register-center">
             <div class="modal-content modal-content-register">
-                <h2 class="title">Register</h2>
+                <h2 class="title">{{trans('users.register')}}</h2>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
@@ -47,7 +47,8 @@
                                name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary button-properties-register">Register</button>
+                    <button type="submit"
+                            class="btn btn-primary button-properties-register">{{trans('users.register')}}</button>
                 </form>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Auth;
@@ -12,6 +13,7 @@ use Auth;
  */
 class Event extends Model
 {
+    use Notifiable;
     /**
      * @var array
      */
@@ -20,7 +22,8 @@ class Event extends Model
         'time',
         'name',
         'description',
-        'address'
+        'address',
+        'image'
     ];
 
     /**
@@ -163,5 +166,34 @@ class Event extends Model
     {
         $event = $this->find($event_id);
         return $event->eventUsers->count();
+    }
+
+    /**
+     * @param string $restaurant
+     * @return bool
+     */
+    public function hasAnyRestaurant(string $restaurant): bool
+    {
+        return null !== $this->restaurants()->where('name', $restaurant)->first();
+    }
+
+    /**
+     * @param int $event_id
+     * @return string
+     */
+    public function joinedUsers(int $event_id): string
+    {
+        $event = $this->find($event_id);
+       return implode(', ',$event->eventUsers()->get()->pluck('name')->toArray());
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function eventRestaurants(int $id)
+    {
+        $event = $this->find($id);
+        return $event->restaurants()->get()->sortBy('id');
     }
 }

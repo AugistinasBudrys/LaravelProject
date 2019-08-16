@@ -38,16 +38,14 @@ class EventRepository implements EventRepositoryInterface
         $event = Event::find($eventId);
         return $event->removeEvent($eventId);
     }
-
+    
     /**
-     * Request the creation of new event entry into database
-     *
-     * @param Request $request
+     * @param array $request
      * @return Event
      */
-    public function create(Request $request): Event
+    public function create(array $request): Event
     {
-        return Event::create($request->all());
+        return Event::create($request);
     }
 
     /**
@@ -67,6 +65,7 @@ class EventRepository implements EventRepositoryInterface
     {
         return Event::get()
             ->where('date', '>=', Carbon::now()->toDateString())
+            ->sortBy('time')
             ->sortBy('date')
             ->take($num);
     }

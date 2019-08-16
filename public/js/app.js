@@ -16819,7 +16819,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.14';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -49218,7 +49218,89 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
-$('document').ready(function () {});
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$(document).ready(function () {
+  $('.join').click(function (e) {
+    e.preventDefault();
+    var eventId = $('#extra').val();
+    $.ajax({
+      type: 'POST',
+      url: '/events/join',
+      data: {
+        "data": eventId
+      },
+      dataType: 'json',
+      success: function success(data) {
+        $('#joined-users').load(document.URL + ' #joined-users');
+      },
+      error: function error(e) {
+        console.log(e);
+      }
+    });
+  });
+});
+$('.join').on('click', function () {
+  var el = $(this);
+
+  if (el.text() === el.data('text-swap')) {
+    el.text(el.data('text-original'));
+  } else {
+    el.data('text-original', el.text());
+    el.text(el.data('text-swap'));
+  }
+});
+$(document).on('click', '.addRest', function (e) {
+  e.preventDefault();
+  $('#edit-item').modal('show');
+});
+$('.Add').click(function (e) {
+  e.preventDefault();
+  var event_id = $('#eventId').val();
+  var restaurant_id = [];
+  $('#restaurantId:checked').each(function () {
+    restaurant_id.push($(this).val());
+  });
+  $.ajax({
+    type: 'POST',
+    url: '/events/assign/restaurant',
+    data: {
+      event_id: event_id,
+      restaurant_id: restaurant_id
+    },
+    dataType: 'json',
+    success: function success(data) {
+      $('#edit-item').modal('hide');
+      $('#added-events').load(document.URL + ' #added-events');
+    },
+    error: function error(e) {
+      console.log(e);
+    }
+  });
+});
+$('.vote').click(function (e) {
+  e.preventDefault();
+  var event_id = $('#vote').val();
+  var restaurant_id = e.target.id;
+  console.log(event_id);
+  console.log(restaurant_id);
+  $.ajax({
+    type: 'POST',
+    url: '/events/vote',
+    data: {
+      event_id: event_id,
+      restaurant_id: restaurant_id
+    },
+    dataType: 'json',
+    success: function success(data) {},
+    error: function error(e) {
+      console.log(e);
+    }
+  });
+});
 
 /***/ }),
 
@@ -49237,8 +49319,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}

@@ -1,90 +1,72 @@
 @extends('layouts.app')
 @section('content')
-
     <div class='container'>
-
         <div class='row'>
-
-            <div class='col-md-9'>
-
-                <!-- Pavadinimas ir Join mygtukas -->
+            <div class='col-md'>
                 <div class='d-md-flex justify-content-between'>
-                    <h2 class='mt-2'>Restorano pavadinimas</h2>
-                    <button type='button' class='btn btn-primary btn-sm my-2'>Join</button>
+                    <h2 class='m-2'>{{$event->name}}</h2>
+                    <div class='d-md-flex justify-content-end'></div>
+                    @if($event->modelIf($event->id) === false)
+                        <button type='submit' id='extra' class='btn btn-primary btn-sm my-2 join' value='{{$event->id}}'
+                                data-text-swap='Leave'>{{trans('events.btn_join')}}
+                        </button>
+                    @else
+                        <button type='submit' id='extra' class='btn btn-primary btn-sm my-2 join' value='{{$event->id}}'
+                                data-text-swap='Join'>{{trans('events.btn_leave')}}
+                        </button>
+                    @endif
                 </div>
-
                 <hr>
-                <!-- Date -->
-                <p>Date</p>
+                <p>{{$event->date}}</p>
                 <hr>
-
-                <!-- Image -->
-                <div class='p-2'><img class='img-fluid' src='http://placehold.it/900x300' alt=''></div>
-                <hr>
-
-                <!-- 5 smaller images -->
-                <div class='d-md-flex align-items-start'>
-                    <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
-                    <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
-                    <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
-                    <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
-                    <div class='p-2'><img class='img-fluid ' src='http://placehold.it/900x300' alt=''></div>
-                </div>
-
-                <hr>
-
-                <!-- Description -->
-                <div class='card'>
-                    <h5 class='card-header'>Description</h5>
+                <div class='event-padding-block'><img class='img-fluid' src='{{$event->image}}' alt=''></div>
+                <div class='card event-padding-block'>
+                    <h5 class='card-header'>{{trans('events.description')}}</h5>
                     <div class='card-body'>
-                        <p class='card-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero,
-                            obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis
-                            eligendi eos magni recusandae laborum minus inventore?</p>
+                        <p class='card-text'>{{$event->description}}</p>
                     </div>
                 </div>
-
                 <hr>
+                <div class='card w-100 my-2'>
 
-                <!-- Papildoma informacija -->
-                <div class='card w-50 my-2'>
                     <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 1</h5>
-                        <p class='card-text'>Meniu</p>
+                        <h5 class='card-title'>{{trans('events.joined')}}</h5>
+                        <p class='card-text'
+                           id='joined-users'>{{$event->joinedUsers($event->id)}}</p>
                     </div>
                 </div>
-
-                <div class='card w-50 my-2'>
+                <hr>
+                <div class='card w-100 my-2'>
                     <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 2</h5>
-                        <p class='card-text'>Atsiliepimai</p>
+                        <h5 class='card-title'>{{trans('events.res_event')}}</h5>
+                        <div id='added-events'>
+                            <input type='hidden' id='vote' value='{{$event->id}}'>
+                            @foreach($event->eventRestaurants($event->id) as $names)
+                                <div class='d-md-flex justify-content-between'>
+                                    <p class='card-text'>{{$names->name}}</p>
+                                    <button id='{{$names->id}}' class='btn-primary btn-sm mb-2 vote'>vote</button>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-
-                <div class='card w-50 my-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>Papildoma informacija 3</h5>
-                        <p class='card-text'>Kontaktai</p>
-                    </div>
-                </div>
-
             </div>
-
-            <div class='col-lg-3'>
-
-                <!-- Administratoriaus veikla -->
-                <div class='card mt-2'>
-                    <h5 class='card-header'>Administratorius</h5>
+            @hasrole('admin')
+            <div class='col-md-3'>
+                <div class='card m-2'>
+                    <h5 class='card-header'>{{trans('events.admin')}}</h5>
                     <div class='card-body'>
-                        <h6 class='card-title'>Administratoriaus veiksmai</h6>
-                        <a href='#' class='btn btn-primary my-2'>Prideti restoraną</a>
-                        <a href='#' class='btn btn-primary my-2'>Ištrinti restoraną</a>
-                        <a href='#' class='btn btn-primary my-2'>Redaguoti restoraną</a>
+                        <h6 class='card-title'>{{trans('events.actions')}}</h6>
+                        <button class='btn btn-primary my-2 addRest' name='add' value='add'
+                                id='{{$event->id}}'>{{trans('events.add_res')}}</button>
+
+                        <button id='yes' class='btn btn-primary my-2'>{{trans('events.delete')}}</button>
+                        <a href='#' class='btn btn-primary my-2'>{{trans('events.edit')}}</a>
                     </div>
                 </div>
-
             </div>
-
+            @endhasrole
         </div>
     </div>
-
+    @include('events/add',['event'=>$event, 'restaurants'=>$restaurants])
 @endsection
